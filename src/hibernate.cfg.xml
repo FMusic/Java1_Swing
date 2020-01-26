@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:sqlserver://DESKTOP-OSC7H6E\SQLEXPRESS:64725;database=Java1_Hospital
+        </property>
+        <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+        <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
+        <property name="connection.username">JavaHospital</property>
+        <property name="connection.password">JavaHospital</property>
+
+        <!-- DB schema will be updated if needed -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <mapping class="com.fm.model.AddressInfoEntity"/>
+        <mapping class="com.fm.model.BasicComplaintsEntity"/>
+        <mapping class="com.fm.model.Calendar"/>
+        <mapping class="com.fm.model.ComprehensivePatientEntity"/>
+        <mapping class="com.fm.model.ContactDetailsEntity"/>
+        <mapping class="com.fm.model.ImportantMedicalComplaintsEntity"/>
+        <mapping class="com.fm.model.LifestyleDetsEntity"/>
+        <mapping class="com.fm.model.MiniPatientEntity"/>
+        <mapping class="com.fm.model.NextOfKinsEntity"/>
+        <mapping class="com.fm.model.PatientsFilesEntity"/>
+        <mapping class="com.fm.model.PersonalDetailsEntity"/>
+        <mapping class="com.fm.model.ProfessionDetsEntity"/>
+        <mapping class="com.fm.model.StaffEntity"/>
+        <mapping class="com.fm.model.TypesEntity"/>
+    </session-factory>
+</hibernate-configuration>
