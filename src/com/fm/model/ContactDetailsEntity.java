@@ -43,12 +43,12 @@ public class ContactDetailsEntity {
     }
 
     @ManyToOne
-    public AddressInfoEntity getPresentAddressId() {
+    public AddressInfoEntity getPresentAddress() {
         return presentAddress;
     }
 
-    public void setPresentAddressId(AddressInfoEntity presentAddressId) {
-        this.presentAddress = presentAddressId;
+    public void setPresentAddress(AddressInfoEntity presentAddress) {
+        this.presentAddress = presentAddress;
     }
 
     @ManyToOne

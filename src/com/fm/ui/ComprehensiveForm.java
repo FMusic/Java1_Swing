@@ -1,9 +1,7 @@
 package com.fm.ui;
 
 import com.fm.controller.PatientsController;
-import com.fm.model.ComprehensivePatientEntity;
-import com.fm.model.MiniPatientEntity;
-import com.fm.model.NextOfKinsEntity;
+import com.fm.model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -189,6 +187,33 @@ public class ComprehensiveForm extends JFrame{
         tfMiniNextFirst.setText(nke.getFirstName());
         tfMiniNextMiddle.setText(nke.getMiddleName());
         tfMiniNextLast.setText(nke.getLastName());
+        tfMiniOpid.setText(String.valueOf(mpe.getIdPatient()));
+        tfMiniRelationship.setText(nke.getRelationship());
+        if (mpe.getSex() == "M"){
+            rbMiniMale.setSelected(true);
+        } else{
+            rbMiniFemale.setSelected(true);
+        }
+        ContactDetailsEntity cde = cpe.getContactDetails();
+        tfContactEmail.setText(cde.getEmail());
+        tfContactFax.setText(cde.getFax());
+        tfContactMobile.setText(cde.getMobile());
+        tfContactPager.setText(cde.getPager());
+        AddressInfoEntity perm = cde.getPermanentAddress();
+        tfContactPermArea.setText(perm.getArea() !=  null ? perm.getArea() : "");
+        tfContactPermCity.setText(perm.getCity() !=  null ? perm.getCity() : "");
+        tfContactPermDoorno.setText(String.valueOf(perm.getDoorNo()) !=  null ? String.valueOf(perm.getDoorNo()) : "");
+        tfContactPermPincode.setText(perm.getPincode() !=  null ? perm.getPincode() : "");
+        tfContactPermState.setText(perm.getState() !=  null ? perm.getState() : "");
+        tfContactPermStreet.setText(perm.getStreet() !=  null ? perm.getStreet() : "");
+        AddressInfoEntity pres = cde.getPresentAddress() ;
+        tfContactPresArea.setText(pres.getArea() !=  null ? pres.getArea() : "");
+        tfContactPresCity.setText(pres.getCity() !=  null ? pres.getCity() : "");
+        tfContactPresState.setText(pres.getState() !=  null ? pres.getState() : "");
+        tfContactPresPincode.setText(pres.getPincode() !=  null ? pres.getPincode() : "");
+        tfContactPresDoorNo.setText(String.valueOf(pres.getDoorNo()) !=  null ? String.valueOf(pres.getDoorNo()) : "");
+        tfContactPresStreet.setText(pres.getStreet() !=  null ? pres.getStreet() : "");
+        //todo - finish this
     }
 
     private void saveData() {
