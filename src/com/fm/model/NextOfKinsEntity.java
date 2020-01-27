@@ -77,12 +77,12 @@ public class NextOfKinsEntity {
     }
 
     @OneToOne
-    public ContactDetailsEntity getContactDetailsId() {
+    public ContactDetailsEntity getContactDetails() {
         return contactDetails;
     }
 
-    public void setContactDetailsId(ContactDetailsEntity contactDetailsId) {
-        this.contactDetails = contactDetailsId;
+    public void setContactDetails(ContactDetailsEntity contactDetails) {
+        this.contactDetails = contactDetails;
     }
 
     @Override

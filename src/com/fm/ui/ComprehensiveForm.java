@@ -206,14 +206,29 @@ public class ComprehensiveForm extends JFrame{
         tfContactPermPincode.setText(perm.getPincode() !=  null ? perm.getPincode() : "");
         tfContactPermState.setText(perm.getState() !=  null ? perm.getState() : "");
         tfContactPermStreet.setText(perm.getStreet() !=  null ? perm.getStreet() : "");
-        AddressInfoEntity pres = cde.getPresentAddress() ;
+        AddressInfoEntity pres = cde.getPresentAddress() != null ? cde.getPresentAddress() : new AddressInfoEntity();
         tfContactPresArea.setText(pres.getArea() !=  null ? pres.getArea() : "");
         tfContactPresCity.setText(pres.getCity() !=  null ? pres.getCity() : "");
         tfContactPresState.setText(pres.getState() !=  null ? pres.getState() : "");
         tfContactPresPincode.setText(pres.getPincode() !=  null ? pres.getPincode() : "");
         tfContactPresDoorNo.setText(String.valueOf(pres.getDoorNo()) !=  null ? String.valueOf(pres.getDoorNo()) : "");
         tfContactPresStreet.setText(pres.getStreet() !=  null ? pres.getStreet() : "");
-        //todo - finish this
+        NextOfKinsEntity nok = cpe.getNextOfKin();
+        ContactDetailsEntity cdeNok = nok.getContactDetails();
+        AddressInfoEntity adrNok = cdeNok.getPresentAddress() != null ? cdeNok.getPresentAddress() : new AddressInfoEntity();
+        tfNokArea.setText(adrNok.getArea() != null ? adrNok.getArea() : "");
+        tfNokCity.setText(adrNok.getCity() != null ? adrNok.getCity() : "");
+        tfNokDoorno.setText(adrNok.getDoorNo() != null ? String.valueOf(adrNok.getDoorNo()) : "");
+        tfNokState.setText(adrNok.getState() != null ? adrNok.getState() : "");
+        tfNokStreet.setText(adrNok.getStreet() != null ? adrNok.getStreet() : "");
+        tfNokPin.setText(adrNok.getPincode() != null ? adrNok.getPincode() : "");
+        tfNokEmail.setText(cdeNok.getEmail() != null ? cdeNok.getEmail() : "");
+        tfNokFax.setText(cdeNok.getFax() != null ? cdeNok.getFax() : "");
+        tfNokMob.setText(cdeNok.getMobile() != null ? cdeNok.getMobile() : "");
+        tfNokFirst.setText(nok.getFirstName() != null ? nok.getFirstName() : "");
+        tfNokMiddle.setText(nok.getMiddleName() != null ? nok.getMiddleName() : "");
+        tfNokLast.setText(nok.getLastName() != null ? nok.getLastName() : "");
+
     }
 
     private void saveData() {
