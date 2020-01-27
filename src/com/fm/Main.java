@@ -17,7 +17,7 @@ public class Main {
 
     private static void hibernateCheck() {
         //Hibernate checkers
-        Sample.putSampleData();
+        //Sample.putSampleData();
         ControllersController.main();
     }
 }
