@@ -42,8 +42,7 @@ public class TypesEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TypesEntity that = (TypesEntity) o;
-        return idType == that.idType &&
-                Objects.equals(typeName, that.typeName);
+        return this.typeName.equals(((TypesEntity) o).typeName);
     }
 
     @Override

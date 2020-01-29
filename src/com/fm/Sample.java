@@ -18,7 +18,8 @@ public class Sample {
         StaffEntity teSpecAdela = new StaffEntity("Adela", "Lukic", teSpec, true);
         AddressInfoEntity anaPermAdress = new AddressInfoEntity(17, "Lipovljanska", "Zagreb", "Zagreb",
                 "Croatia", "10000");
-        AddressInfoEntity anaAdress = anaPermAdress;
+        AddressInfoEntity anaAdress = new AddressInfoEntity(17, "Lipovljanska", "Zagreb", "Zagreb",
+                "Croatia", "10000");
         ContactDetailsEntity cde = new ContactDetailsEntity(anaAdress, anaPermAdress, "none", "None",
                 "0911611136", "pager", "fax", "email");
         NextOfKinsEntity nke = new NextOfKinsEntity(cde,"Frane", "Music", "Music", "Daddy");

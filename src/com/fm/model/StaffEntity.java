@@ -90,12 +90,8 @@ public class StaffEntity {
 
     @Override
     public String toString() {
-        return "StaffEntity{" +
-                "idEmployee=" + idEmployee +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", type=" + type +
-                ", available=" + available +
-                '}';
+        if (this.getType().equals(new TypesEntity("Doctor")) || this.getType().equals(new TypesEntity("dr")))
+            return "Dr." + name + " " + surname;
+        return name + " " + surname;
     }
 }

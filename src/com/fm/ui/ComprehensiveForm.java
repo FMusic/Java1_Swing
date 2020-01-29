@@ -118,6 +118,7 @@ public class ComprehensiveForm extends JFrame {
     private JCheckBox allergiesCheckBox;
     private JCheckBox adverseReactCheckBox;
     private JCheckBox majorSurgeriesCheckbox;
+    private String NO = "no";
 
 //    public ComprehensiveForm() {
 //        cpe = null;
@@ -181,21 +182,15 @@ public class ComprehensiveForm extends JFrame {
     }
 
     private void initData() {
-        MiniPatientEntity mpe = cpe.getMiniPatient();
-        tfMiniFirst.setText(mpe.getFirstName());
-        tfMiniMiddle.setText(mpe.getMiddleName());
-        tfMiniLast.setText(mpe.getLastName());
-        NextOfKinsEntity nke = cpe.getNextOfKin();
-        tfMiniNextFirst.setText(nke.getFirstName());
-        tfMiniNextMiddle.setText(nke.getMiddleName());
-        tfMiniNextLast.setText(nke.getLastName());
-        tfMiniOpid.setText(String.valueOf(mpe.getIdPatient()));
-        tfMiniRelationship.setText(nke.getRelationship());
-        if (mpe.getSex().equals("M")) {
-            rbMiniMale.setSelected(true);
-        } else {
-            rbMiniFemale.setSelected(true);
-        }
+        setBasic();
+        setContact();
+        setNok();
+        setPersonal();
+        setLifestyle();
+        setComplaints();
+    }
+
+    private void setContact() {
         ContactDetailsEntity cde = cpe.getContactDetails();
         tfContactEmail.setText(cde.getEmail());
         tfContactFax.setText(cde.getFax());
@@ -215,6 +210,27 @@ public class ComprehensiveForm extends JFrame {
         tfContactPresPincode.setText(pres.getPincode() != null ? pres.getPincode() : "");
         tfContactPresDoorNo.setText(String.valueOf(pres.getDoorNo()) != null ? String.valueOf(pres.getDoorNo()) : "");
         tfContactPresStreet.setText(pres.getStreet() != null ? pres.getStreet() : "");
+    }
+
+    private void setBasic() {
+        MiniPatientEntity mpe = cpe.getMiniPatient();
+        tfMiniFirst.setText(mpe.getFirstName());
+        tfMiniMiddle.setText(mpe.getMiddleName());
+        tfMiniLast.setText(mpe.getLastName());
+        NextOfKinsEntity nke = cpe.getNextOfKin();
+        tfMiniNextFirst.setText(nke.getFirstName());
+        tfMiniNextMiddle.setText(nke.getMiddleName());
+        tfMiniNextLast.setText(nke.getLastName());
+        tfMiniOpid.setText(String.valueOf(mpe.getIdPatient()));
+        tfMiniRelationship.setText(nke.getRelationship());
+        if (mpe.getSex().equals("M")) {
+            rbMiniMale.setSelected(true);
+        } else {
+            rbMiniFemale.setSelected(true);
+        }
+    }
+
+    private void setNok() {
         NextOfKinsEntity nok = cpe.getNextOfKin();
         ContactDetailsEntity cdeNok = nok.getContactDetails() != null ? nok.getContactDetails() : new ContactDetailsEntity();
         AddressInfoEntity adrNok = cdeNok.getPresentAddress() != null ? cdeNok.getPresentAddress() : new AddressInfoEntity();
@@ -233,6 +249,9 @@ public class ComprehensiveForm extends JFrame {
         tfNokPag.setText(cdeNok.getPager() != null ? cdeNok.getPager() : "");
         tfNokTelHome.setText(cdeNok.getTelephoneHome() != null ? cdeNok.getTelephoneHome() : "");
         tfNokTelWork.setText(cdeNok.getTelephoneWork() != null ? cdeNok.getTelephoneWork() : "");
+    }
+
+    private void setPersonal() {
         PersonalDetailsEntity pde = cpe.getPersonalDetails() != null ? cpe.getPersonalDetails() : new PersonalDetailsEntity();
         tfMariatl.setText(pde.getMaritalStatus() != null ? pde.getMaritalStatus() : "");
         tfNoofDep.setText(String.valueOf(pde.getNoOfDependents()) != null ? String.valueOf(pde.getNoOfDependents()) : "");
@@ -242,8 +261,6 @@ public class ComprehensiveForm extends JFrame {
         ProfessionDetsEntity prof = cpe.getProfessionDets() != null ? cpe.getProfessionDets() : new ProfessionDetsEntity();
         tfOccupation.setText(prof.getOccupation() != null ? prof.getOccupation() : "");
         tfGrossAnnual.setText(prof.getGrossAnnualIncome() != null ? String.valueOf(prof.getGrossAnnualIncome()) : "");
-        setLifestyle();
-        setComplaints();
     }
 
     private void setComplaints() {
@@ -303,7 +320,7 @@ public class ComprehensiveForm extends JFrame {
             tfKnownAdverseReact.setEnabled(true);
             tfKnownAdverseReact.setText(imc.getAdverseReactions());
         }
-        if (imc.getMajorSurgeries() != null){
+        if (imc.getMajorSurgeries() != null || !imc.getMajorSurgeries().equals(NO)){
             majorSurgeriesCheckbox.setSelected(true);
             tfMajorSurgeries.setEnabled(true);
             tfMajorSurgeries.setText(imc.getMajorSurgeries());
