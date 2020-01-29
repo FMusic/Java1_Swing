@@ -115,19 +115,19 @@ public class ComprehensiveForm extends JFrame {
     private JCheckBox adverseReactCheckBox;
     private JCheckBox majorSurgeriesCheckbox;
 
-    public ComprehensiveForm() {
-        cpe = null;
-        initWidgets();
-        initListeners();
-        setForm();
-    }
+//    public ComprehensiveForm() {
+//        cpe = null;
+//        initWidgets();
+//        initListeners();
+//        setForm();
+//    }
 
     private void setForm() {
         setContentPane(panelMain);
         setSize(new Dimension(1200, 700));
     }
 
-    public ComprehensiveForm(MiniPatientEntity mpe) throws Exception {
+    public ComprehensiveForm(MiniPatientEntity mpe) {
         try {
             cpe = PatientsController.getPatientForMini(mpe);
             initWidgets();
@@ -154,38 +154,17 @@ public class ComprehensiveForm extends JFrame {
     }
 
     private void initListeners() {
-        saveAndExitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                saveData();
-                exit();
-            }
+        saveAndExitButton.addActionListener(actionEvent -> {
+            saveData();
+            exit();
         });
-        saveAndReturnButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                saveData();
-                returnScreen();
-            }
+        saveAndReturnButton.addActionListener(actionEvent -> {
+            saveData();
+            returnScreen();
         });
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                saveData();
-            }
-        });
-        smokerCheckBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                tfNoOfCigarettesPerDay.setEnabled(smokerCheckBox.isSelected());
-            }
-        });
-        consumeAlchoholicBeveragesCheckBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                tfDrinksPerDay.setEnabled(consumeAlchoholicBeveragesCheckBox.isSelected());
-            }
-        });
+        saveButton.addActionListener(actionEvent -> saveData());
+        smokerCheckBox.addActionListener(actionEvent -> tfNoOfCigarettesPerDay.setEnabled(smokerCheckBox.isSelected()));
+        consumeAlchoholicBeveragesCheckBox.addActionListener(actionEvent -> tfDrinksPerDay.setEnabled(consumeAlchoholicBeveragesCheckBox.isSelected()));
     }
 
     private void returnScreen() {
@@ -208,7 +187,7 @@ public class ComprehensiveForm extends JFrame {
         tfMiniNextLast.setText(nke.getLastName());
         tfMiniOpid.setText(String.valueOf(mpe.getIdPatient()));
         tfMiniRelationship.setText(nke.getRelationship());
-        if (mpe.getSex() == "M") {
+        if (mpe.getSex().equals("M")) {
             rbMiniMale.setSelected(true);
         } else {
             rbMiniFemale.setSelected(true);
