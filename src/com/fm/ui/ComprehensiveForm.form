@@ -1396,7 +1396,7 @@
                       <enabled value="false"/>
                     </properties>
                   </component>
-                  <component id="8898b" class="javax.swing.JCheckBox" default-binding="true">
+                  <component id="8898b" class="javax.swing.JCheckBox" binding="respiratoryCheckBox">
                     <constraints>
                       <grid row="16" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                       <forms/>
@@ -1436,7 +1436,7 @@
                       <enabled value="false"/>
                     </properties>
                   </component>
-                  <component id="76536" class="javax.swing.JCheckBox" default-binding="true">
+                  <component id="76536" class="javax.swing.JCheckBox" binding="orthopedicCondCheckBox">
                     <constraints>
                       <grid row="20" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                       <forms/>
@@ -1456,7 +1456,7 @@
                       <enabled value="false"/>
                     </properties>
                   </component>
-                  <component id="6d4f6" class="javax.swing.JCheckBox" default-binding="true">
+                  <component id="6d4f6" class="javax.swing.JCheckBox" binding="muscularCheckBox">
                     <constraints>
                       <grid row="22" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                       <forms/>
@@ -1476,7 +1476,7 @@
                       <enabled value="false"/>
                     </properties>
                   </component>
-                  <component id="afe04" class="javax.swing.JCheckBox" default-binding="true">
+                  <component id="afe04" class="javax.swing.JCheckBox" binding="neuroCheckBox">
                     <constraints>
                       <grid row="24" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                       <forms/>
@@ -1496,7 +1496,7 @@
                       <enabled value="false"/>
                     </properties>
                   </component>
-                  <component id="3752b" class="javax.swing.JCheckBox" default-binding="true">
+                  <component id="3752b" class="javax.swing.JCheckBox" binding="allergiesCheckBox">
                     <constraints>
                       <grid row="26" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                       <forms/>
@@ -1516,7 +1516,7 @@
                       <enabled value="false"/>
                     </properties>
                   </component>
-                  <component id="a9236" class="javax.swing.JCheckBox" default-binding="true">
+                  <component id="a9236" class="javax.swing.JCheckBox" binding="adverseReactCheckBox">
                     <constraints>
                       <grid row="28" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                       <forms/>
@@ -1536,7 +1536,7 @@
                       <enabled value="false"/>
                     </properties>
                   </component>
-                  <component id="9d067" class="javax.swing.JCheckBox" default-binding="true">
+                  <component id="9d067" class="javax.swing.JCheckBox" binding="majorSurgeriesCheckbox">
                     <constraints>
                       <grid row="30" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                       <forms/>

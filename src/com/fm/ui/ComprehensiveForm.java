@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ComprehensiveForm extends JFrame{
+public class ComprehensiveForm extends JFrame {
     //Frane added
     private ComprehensivePatientEntity cpe = null;
     ButtonGroup group1;
@@ -107,8 +107,15 @@ public class ComprehensiveForm extends JFrame{
     private JTextField tfKnownAllergies;
     private JTextField tfKnownAdverseReact;
     private JTextField tfMajorSurgeries;
+    private JCheckBox respiratoryCheckBox;
+    private JCheckBox orthopedicCondCheckBox;
+    private JCheckBox muscularCheckBox;
+    private JCheckBox neuroCheckBox;
+    private JCheckBox allergiesCheckBox;
+    private JCheckBox adverseReactCheckBox;
+    private JCheckBox majorSurgeriesCheckbox;
 
-    public ComprehensiveForm(){
+    public ComprehensiveForm() {
         cpe = null;
         initWidgets();
         initListeners();
@@ -127,7 +134,7 @@ public class ComprehensiveForm extends JFrame{
             initListeners();
             initData();
             setForm();
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -167,6 +174,18 @@ public class ComprehensiveForm extends JFrame{
                 saveData();
             }
         });
+        smokerCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                tfNoOfCigarettesPerDay.setEnabled(smokerCheckBox.isSelected());
+            }
+        });
+        consumeAlchoholicBeveragesCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                tfDrinksPerDay.setEnabled(consumeAlchoholicBeveragesCheckBox.isSelected());
+            }
+        });
     }
 
     private void returnScreen() {
@@ -189,9 +208,9 @@ public class ComprehensiveForm extends JFrame{
         tfMiniNextLast.setText(nke.getLastName());
         tfMiniOpid.setText(String.valueOf(mpe.getIdPatient()));
         tfMiniRelationship.setText(nke.getRelationship());
-        if (mpe.getSex() == "M"){
+        if (mpe.getSex() == "M") {
             rbMiniMale.setSelected(true);
-        } else{
+        } else {
             rbMiniFemale.setSelected(true);
         }
         ContactDetailsEntity cde = cpe.getContactDetails();
@@ -200,21 +219,21 @@ public class ComprehensiveForm extends JFrame{
         tfContactMobile.setText(cde.getMobile());
         tfContactPager.setText(cde.getPager());
         AddressInfoEntity perm = cde.getPermanentAddress();
-        tfContactPermArea.setText(perm.getArea() !=  null ? perm.getArea() : "");
-        tfContactPermCity.setText(perm.getCity() !=  null ? perm.getCity() : "");
-        tfContactPermDoorno.setText(String.valueOf(perm.getDoorNo()) !=  null ? String.valueOf(perm.getDoorNo()) : "");
-        tfContactPermPincode.setText(perm.getPincode() !=  null ? perm.getPincode() : "");
-        tfContactPermState.setText(perm.getState() !=  null ? perm.getState() : "");
-        tfContactPermStreet.setText(perm.getStreet() !=  null ? perm.getStreet() : "");
+        tfContactPermArea.setText(perm.getArea() != null ? perm.getArea() : "");
+        tfContactPermCity.setText(perm.getCity() != null ? perm.getCity() : "");
+        tfContactPermDoorno.setText(String.valueOf(perm.getDoorNo()) != null ? String.valueOf(perm.getDoorNo()) : "");
+        tfContactPermPincode.setText(perm.getPincode() != null ? perm.getPincode() : "");
+        tfContactPermState.setText(perm.getState() != null ? perm.getState() : "");
+        tfContactPermStreet.setText(perm.getStreet() != null ? perm.getStreet() : "");
         AddressInfoEntity pres = cde.getPresentAddress() != null ? cde.getPresentAddress() : new AddressInfoEntity();
-        tfContactPresArea.setText(pres.getArea() !=  null ? pres.getArea() : "");
-        tfContactPresCity.setText(pres.getCity() !=  null ? pres.getCity() : "");
-        tfContactPresState.setText(pres.getState() !=  null ? pres.getState() : "");
-        tfContactPresPincode.setText(pres.getPincode() !=  null ? pres.getPincode() : "");
-        tfContactPresDoorNo.setText(String.valueOf(pres.getDoorNo()) !=  null ? String.valueOf(pres.getDoorNo()) : "");
-        tfContactPresStreet.setText(pres.getStreet() !=  null ? pres.getStreet() : "");
+        tfContactPresArea.setText(pres.getArea() != null ? pres.getArea() : "");
+        tfContactPresCity.setText(pres.getCity() != null ? pres.getCity() : "");
+        tfContactPresState.setText(pres.getState() != null ? pres.getState() : "");
+        tfContactPresPincode.setText(pres.getPincode() != null ? pres.getPincode() : "");
+        tfContactPresDoorNo.setText(String.valueOf(pres.getDoorNo()) != null ? String.valueOf(pres.getDoorNo()) : "");
+        tfContactPresStreet.setText(pres.getStreet() != null ? pres.getStreet() : "");
         NextOfKinsEntity nok = cpe.getNextOfKin();
-        ContactDetailsEntity cdeNok = nok.getContactDetails();
+        ContactDetailsEntity cdeNok = nok.getContactDetails() != null ? nok.getContactDetails() : new ContactDetailsEntity();
         AddressInfoEntity adrNok = cdeNok.getPresentAddress() != null ? cdeNok.getPresentAddress() : new AddressInfoEntity();
         tfNokArea.setText(adrNok.getArea() != null ? adrNok.getArea() : "");
         tfNokCity.setText(adrNok.getCity() != null ? adrNok.getCity() : "");
@@ -228,7 +247,101 @@ public class ComprehensiveForm extends JFrame{
         tfNokFirst.setText(nok.getFirstName() != null ? nok.getFirstName() : "");
         tfNokMiddle.setText(nok.getMiddleName() != null ? nok.getMiddleName() : "");
         tfNokLast.setText(nok.getLastName() != null ? nok.getLastName() : "");
+        tfNokPag.setText(cdeNok.getPager() != null ? cdeNok.getPager() : "");
+        tfNokTelHome.setText(cdeNok.getTelephoneHome() != null ? cdeNok.getTelephoneHome() : "");
+        tfNokTelWork.setText(cdeNok.getTelephoneWork() != null ? cdeNok.getTelephoneWork() : "");
+        PersonalDetailsEntity pde = cpe.getPersonalDetails() != null ? cpe.getPersonalDetails() : new PersonalDetailsEntity();
+        tfMariatl.setText(pde.getMaritalStatus() != null ? pde.getMaritalStatus() : "");
+        tfNoofDep.setText(String.valueOf(pde.getNoOfDependents()) != null ? String.valueOf(pde.getNoOfDependents()) : "");
+        tfHeight.setText(String.valueOf(pde.getHeight()) != null ? String.valueOf(pde.getHeight()) : "");
+        tfWeight.setText(String.valueOf(pde.getWeight()) != null ? String.valueOf(pde.getWeight()) : "");
+        tfBloodType.setText(pde.getBloodType() != null ? pde.getBloodType() : "");
+        ProfessionDetsEntity prof = cpe.getProfessionDets() != null ? cpe.getProfessionDets() : new ProfessionDetsEntity();
+        tfOccupation.setText(prof.getOccupation() != null ? prof.getOccupation() : "");
+        tfGrossAnnual.setText(prof.getGrossAnnualIncome() != null ? String.valueOf(prof.getGrossAnnualIncome()) : "");
+        setLifestyle();
+        setComplaints();
+    }
 
+    private void setComplaints() {
+        ImportantMedicalComplaintsEntity imc = cpe.getImportantMedicalCompl();
+        BasicComplaintsEntity bce = cpe.getBasicComplaints();
+        tfComplaint.setText(bce.getStatementOfComplaint() != null ? bce.getStatementOfComplaint() : "");
+        tfHistoryPrevTreat.setText(bce.getHistoryOfPreviousTreatment() != null ? bce.getHistoryOfPreviousTreatment() : "");
+        tfHospitalTreated.setText(bce.getPhysicianTreated().toString() != null ? bce.getPhysicianTreated().toString() : "");
+        if (imc.getDiabetic() != null){
+            diabeticCheckBox.setSelected(true);
+            tfDiabetic.setEnabled(true);
+            tfDiabetic.setText(imc.getDiabetic());
+        }
+        if (imc.getHypertensive()!= null){
+            hypertensiveCheckBox.setSelected(true);
+            tfHypertensive.setEnabled(true);
+            tfHypertensive.setText(imc.getHypertensive());
+        }
+        if (imc.getCardiacCondition() != null){
+            cardiacConditionCheckBox.setSelected(true);
+            tfCardiacCond.setEnabled(true);
+            tfCardiacCond.setText(imc.getCardiacCondition());
+        }
+        if (imc.getRespiratoryCondition() != null){
+            respiratoryCheckBox.setSelected(true);
+            tfRespCond.setEnabled(true);
+            tfRespCond.setText(imc.getRespiratoryCondition());
+        }
+        if (imc.getDigestiveCondition() != null){
+            digestiveConditionCheckBox.setSelected(true);
+            tfDigestiveCond.setEnabled(true);
+            tfDigestiveCond.setText(imc.getDigestiveCondition());
+        }
+        if (imc.getOrthopedicCondition() != null){
+            orthopedicCondCheckBox.setSelected(true);
+            tfOrthoepdicCond.setEnabled(true);
+            tfOrthoepdicCond.setText(imc.getOrthopedicCondition());
+        }
+        if (imc.getMuscularCondition() != null){
+            muscularCheckBox.setSelected(true);
+            tfMuscularCond.setEnabled(true);
+            tfMuscularCond.setText(imc.getMuscularCondition());
+
+        }
+        if (imc.getNeurologicalCondition() != null){
+            neuroCheckBox.setSelected(true);
+            tfNeuroCond.setEnabled(true);
+            tfNeuroCond.setText(imc.getNeurologicalCondition());
+        }
+        if (imc.getAllergies() != null){
+            allergiesCheckBox.setSelected(true);
+            tfKnownAllergies.setEnabled(true);
+            tfKnownAllergies.setText(imc.getAllergies());
+        }
+        if (imc.getAdverseReactions() != null){
+            adverseReactCheckBox.setSelected(true);
+            tfKnownAdverseReact.setEnabled(true);
+            tfKnownAdverseReact.setText(imc.getAdverseReactions());
+        }
+        if (imc.getMajorSurgeries() != null){
+            majorSurgeriesCheckbox.setSelected(true);
+            tfMajorSurgeries.setEnabled(true);
+            tfMajorSurgeries.setText(imc.getMajorSurgeries());
+        }
+    }
+
+    private void setLifestyle() {
+        LifestyleDetsEntity ld = cpe.getLifestyleDets();
+        vegetarianCheckBox.setSelected(ld.getVegetarian());
+        if (ld.getSmoker()){
+            smokerCheckBox.setSelected(true);
+            tfNoOfCigarettesPerDay.setEnabled(true);
+        }
+        if (ld.getConsumeAlcohol()){
+            consumeAlchoholicBeveragesCheckBox.setSelected(true);
+            tfDrinksPerDay.setEnabled(true);
+        }
+        tfStimulants.setText(ld.getStimulants() != null ? ld.getStimulants() : "");
+        tfCoffeeTeaDay.setText(String.valueOf(ld.getCoffeePerDay()) != null ? String.valueOf(ld.getCoffeePerDay()) : "");
+        tfSoftDrinks.setText(String.valueOf(ld.getSoftDrinksPerDay() != null ? String.valueOf(ld.getSoftDrinksPerDay()) : ""));
+        //todo - set food
     }
 
     private void saveData() {
