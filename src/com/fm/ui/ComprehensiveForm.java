@@ -35,15 +35,18 @@ public class ComprehensiveForm extends JFrame {
     private JTextField tfContactPermState;
     private JTextField tfContactPermPincode;
     private JTextField tfContactTelWork;
+    //todo
     private JTextField tfContactMobile;
     private JTextField tfContactFax;
     private JTextField tfContactTelHome;
+    //todo
     private JTextField tfContactPager;
     private JTextField tfContactEmail;
     private JTextField tfNokFirst;
     private JTextField tfNokMiddle;
     private JTextField tfNokLast;
     private JTextField tfNokRelat;
+    //todo
     private JTextField tfNokDoorno;
     private JTextField tfNokStreet;
     private JTextField tfNokArea;
@@ -85,6 +88,7 @@ public class ComprehensiveForm extends JFrame {
     private JTextField tfBasicBriefStatement;
     private JTextField tfBasicPhoneNumber1;
     private JTextField tfBasicPhone2;
+    //todo
     private JTextField tfMiniNextFirst;
     private JTextField tfMiniNextMiddle;
     private JTextField tfMiniNextLast;
