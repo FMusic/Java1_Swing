@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.fm.ui.DoctorScreen">
+  <grid id="27dc6" binding="pnlMain" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="579ea" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints border-constraint="North"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="acae5" class="javax.swing.JLabel">
+            <constraints/>
+            <properties>
+              <text value="Welcome, choose patient"/>
+            </properties>
+          </component>
+          <component id="ac217" class="javax.swing.JComboBox" binding="cbPatients">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="100e8" class="javax.swing.JButton" binding="goButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Go"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

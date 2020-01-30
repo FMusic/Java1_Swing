@@ -17,26 +17,17 @@ public class MainMenu extends JFrame{
      }
 
     private void setListeners() {
-        btnStaffManagement.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                new HospitalManagementScreen().setVisible(true);
-                setVisible(false);
-            }
+        btnStaffManagement.addActionListener(actionEvent -> {
+            new HospitalManagementScreen().setVisible(true);
+            setVisible(false);
         });
-        btnDoctor.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                new DoctorScreen().setVisible(true);
-                setVisible(false);
-            }
+        btnDoctor.addActionListener(actionEvent -> {
+            new DoctorScreen().setVisible(true);
+            setVisible(false);
         });
-        btnReception.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                new ReceptionScreen();
-                setVisible(false);
-            }
+        btnReception.addActionListener(actionEvent -> {
+            new ReceptionScreen();
+            setVisible(false);
         });
     }
 
