@@ -2,6 +2,7 @@ package com.fm.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -18,6 +19,7 @@ public class MiniPatientEntity {
     private String tel1;
     private String tel2;
     private NextOfKinsEntity nextOfKin;
+    private List<PatientsFilesEntity> listOfFiles;
 
     public MiniPatientEntity() {
     }
@@ -171,5 +173,14 @@ public class MiniPatientEntity {
     @Override
     public int hashCode() {
         return Objects.hash(dateOfInput, idPatient, firstName, middleName, lastName, sex, dateOfBirth, briefStatement, tel1, tel2, nextOfKin);
+    }
+
+    @OneToMany
+    public List<PatientsFilesEntity> getListOfFiles() {
+        return listOfFiles;
+    }
+
+    public void setListOfFiles(List<PatientsFilesEntity> listOfFiles) {
+        this.listOfFiles = listOfFiles;
     }
 }

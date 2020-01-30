@@ -85,13 +85,7 @@ public class PatientsFilesEntity {
 
     @Override
     public String toString() {
-        return "PatientsFilesEntity{" +
-                "idFile=" + idFile +
-                ", patient=" + patient +
-                ", date=" + date +
-                ", doctor=" + doctor +
-                ", text='" + text + '\'' +
-                '}';
+        return date.toString();
     }
 
     @Override
