@@ -28,12 +28,10 @@ public class PatientsController {
     }
 
     public static void saveNewPatient(ComprehensivePatientEntity cpe){
-        //todo
         throw new NotYetImplementedException();
     }
 
     public static void saveNewPatient(MiniPatientEntity mpe){
-        //todo
         throw new NotYetImplementedException();
     }
 
@@ -52,7 +50,6 @@ public class PatientsController {
     }
 
     public List<ComprehensivePatientEntity> getAllPatientsForDoctor(StaffEntity doctor){
-        //todo
         throw new NotYetImplementedException();
     }
 }

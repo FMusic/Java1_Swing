@@ -57,4 +57,6 @@ public class ReceptionScreen extends JFrame {
         setSize(300,300);
         setVisible(true);
     }
+
+
 }

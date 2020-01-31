@@ -1159,36 +1159,33 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="97869" class="javax.swing.JLabel">
+              <grid id="e361f" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
                 <constraints>
-                  <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                  <forms/>
-                </constraints>
-                <properties>
-                  <text value="Have regular meals"/>
-                </properties>
-              </component>
-              <grid id="6b08f" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
-                <constraints>
-                  <grid row="12" column="2" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="12" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <forms/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="c4daa" class="javax.swing.JRadioButton" binding="breakfastRadioButton" default-binding="true">
+                  <component id="5646e" class="javax.swing.JLabel">
+                    <constraints/>
+                    <properties>
+                      <text value="Eating meals:"/>
+                    </properties>
+                  </component>
+                  <component id="16af9" class="javax.swing.JCheckBox" binding="cbBreakfast">
                     <constraints/>
                     <properties>
                       <text value="Breakfast"/>
                     </properties>
                   </component>
-                  <component id="97b1e" class="javax.swing.JRadioButton" binding="lunchRadioButton" default-binding="true">
+                  <component id="ed465" class="javax.swing.JCheckBox" binding="cbLunch">
                     <constraints/>
                     <properties>
                       <text value="Lunch"/>
                     </properties>
                   </component>
-                  <component id="3e8f0" class="javax.swing.JRadioButton" binding="dinnerRadioButton" default-binding="true">
+                  <component id="6989f" class="javax.swing.JCheckBox" binding="cbDinner">
                     <constraints/>
                     <properties>
                       <text value="Dinner"/>
@@ -1196,24 +1193,6 @@
                   </component>
                 </children>
               </grid>
-              <component id="f621a" class="javax.swing.JRadioButton" binding="predominantlyOutsideFoodRadioButton" default-binding="true">
-                <constraints>
-                  <grid row="14" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                  <forms/>
-                </constraints>
-                <properties>
-                  <text value="Predominantly outside food"/>
-                </properties>
-              </component>
-              <component id="351d3" class="javax.swing.JRadioButton" binding="predominantlyEatHomeFoodRadioButton" default-binding="true">
-                <constraints>
-                  <grid row="14" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                  <forms/>
-                </constraints>
-                <properties>
-                  <text value="Predominantly eat home food"/>
-                </properties>
-              </component>
             </children>
           </grid>
           <grid id="45590" layout-manager="BorderLayout" hgap="0" vgap="0">

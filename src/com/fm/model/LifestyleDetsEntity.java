@@ -18,12 +18,16 @@ public class LifestyleDetsEntity {
     private Integer softDrinksPerDay;
     private Boolean regularMeals;
     private Boolean eatHome;
+    private Boolean breakfast;
+    private Boolean lunch;
+    private Boolean dinner;
 
     public LifestyleDetsEntity(){
 
     }
     public LifestyleDetsEntity(boolean vegetarian, boolean smoker, int averageNoOfCigarettesPerDay, boolean consumeAlcohol, int averageNoOfDrinksPerDay,
-                               boolean useStimulants, int coffeePerDay, int softDrinksPerDay, boolean regularMeals, boolean eatHome){
+                               boolean useStimulants, int coffeePerDay, int softDrinksPerDay, boolean regularMeals, boolean eatHome,
+                               boolean breakfast, boolean lunch, boolean dinner){
         this.vegetarian = vegetarian;
         this.smoker = smoker;
         this.averageNoOfCigarettesPerDay = averageNoOfCigarettesPerDay;
@@ -198,5 +202,35 @@ public class LifestyleDetsEntity {
     @Override
     public int hashCode() {
         return Objects.hash(idLifestyle, vegetarian, smoker, averageNoOfCigarettesPerDay, consumeAlcohol, averageNoOfDrinksPerDay, useStimulants, stimulants, coffeePerDay, softDrinksPerDay, regularMeals, eatHome);
+    }
+
+    @Basic
+    @Column(name = "breakfast", nullable = true)
+    public Boolean getBreakfast() {
+        return this.breakfast;
+    }
+
+    public void setBreakfast(Boolean breakfast){
+        this.breakfast = breakfast;
+    }
+
+    @Basic
+    @Column(name = "lunch", nullable = true)
+    public Boolean getLunch() {
+        return this.lunch;
+    }
+
+    public void setLunch(Boolean lunch){
+        this.lunch = lunch;
+    }
+
+    @Basic
+    @Column(name = "dinner", nullable = true)
+    public Boolean getDinner() {
+        return dinner;
+    }
+
+    public void setDinner(Boolean dinner){
+        this.dinner = dinner;
     }
 }

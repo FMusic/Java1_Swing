@@ -2,7 +2,9 @@ package com.fm.controller;
 
 import com.fm.dbRepo.RepoManager;
 import com.fm.model.StaffEntity;
+import com.fm.model.TypesEntity;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.NotYetImplementedException;
 import org.hibernate.query.Query;
 
@@ -17,24 +19,29 @@ public class DoctorsController {
         return staff;
     }
 
-    public void SaveStaffMember(){
-        //todo - implement this
-        throw new NotYetImplementedException();
+    public static void SaveNewStaff(String type, String firstname, String surname) {
+        Session session = RepoManager.getSession();
+        String qs = "from TypesEntity where typeName=:typename";
+        Query q = session.createQuery(qs);
+        q.setString("typename", type);
+        TypesEntity te = (TypesEntity) q.uniqueResult();
+        StaffEntity se = new StaffEntity(firstname, surname, te, true);
+        Transaction tx = session.beginTransaction();
+        session.save(se);
+        tx.commit();
+        RepoManager.closeSession();
     }
 
     public StaffEntity getStaffMember(int id){
         String qs = "from StaffEntity where id = " + id;
-        //todo - complete this
         throw new NotYetImplementedException();
     }
 
     public void saveBulkStaffMembers(List<StaffEntity> listOfStaff){
-        //todo
         throw new NotYetImplementedException();
     }
 
     public List<StaffEntity> getAllStaff(){
-        //todo
         throw new NotYetImplementedException();
     }
 }

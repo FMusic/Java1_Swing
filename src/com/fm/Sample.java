@@ -12,8 +12,8 @@ public class Sample {
     public static void putSampleData(){
         final Session session = RepoManager.getSession();
         //objects instantiation
-        TypesEntity teDoctor = new TypesEntity("dr");
-        TypesEntity teSpec = new TypesEntity("spec");
+        TypesEntity teDoctor = new TypesEntity("Doctor");
+        TypesEntity teSpec = new TypesEntity("Specialist");
         StaffEntity teDrFrane = new StaffEntity("Frane", "Music", teDoctor, true);
         StaffEntity teSpecAdela = new StaffEntity("Adela", "Lukic", teSpec, true);
         AddressInfoEntity anaPermAdress = new AddressInfoEntity(17, "Lipovljanska", "Zagreb", "Zagreb",
@@ -29,7 +29,7 @@ public class Sample {
         ImportantMedicalComplaintsEntity importantMedicalComplAna = new ImportantMedicalComplaintsEntity("no", "no", "good", "bad", "always shitting", "good", "doesn't have",
                 "doesnt have a brain", "Frane", "Fucking with him", "none");
         BasicComplaintsEntity basicComplaintsAna = new BasicComplaintsEntity("Stoopid", "history", teDrFrane);
-        LifestyleDetsEntity lifestyleAna = new LifestyleDetsEntity(false, true, 20, true, 100, true, 1, 2, false, false);
+        LifestyleDetsEntity lifestyleAna = new LifestyleDetsEntity(false, true, 20, true, 100, true, 1, 2, false, false, true, false, true);
         PersonalDetailsEntity personalDetsAna = new PersonalDetailsEntity("unamarried", 4, 180, 62, "0");
         ProfessionDetsEntity professionAna = new ProfessionDetsEntity("Mathematician", 20000);
         ComprehensivePatientEntity cpe = new ComprehensivePatientEntity(new Date(System.currentTimeMillis()), miniAna, cde, nke, personalDetsAna, professionAna,

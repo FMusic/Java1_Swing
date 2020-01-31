@@ -6,7 +6,7 @@ import com.fm.ui.MainMenu;
 
 public class Main {
     public static void main(final String[] args) throws Exception {
-        //hibernateCheck();
+        hibernateCheck();
         new Thread(()-> {
             MainMenu mm = new MainMenu();
             mm.setVisible(true);
