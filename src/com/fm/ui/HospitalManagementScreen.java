@@ -22,6 +22,7 @@ public class HospitalManagementScreen extends JFrame implements ListSelectionLis
     private JTextField tfName;
     private JTextField tfSurname;
     private JList listPatients;
+    private JCheckBox availableCheckBox;
     private List<StaffEntity> listOfDocs;
     private List<StaffEntity> listOfSpecs;
     private StaffEntity[] arrayOfDocs;
@@ -79,6 +80,11 @@ public class HospitalManagementScreen extends JFrame implements ListSelectionLis
             setVisible(false);
             new HospitalManagementScreen().setVisible(true);
         });
+        saveChangesButton.addActionListener(actionEvent -> {
+            DoctorsController.update(selected, tfName.getText(), tfSurname.getText(), availableCheckBox.isSelected());
+            new HospitalManagementScreen().setVisible(true);
+            setVisible(false);
+        });
     }
 
     private void deleteFromLists(StaffEntity toDelete) {
@@ -111,6 +117,7 @@ public class HospitalManagementScreen extends JFrame implements ListSelectionLis
             pnlStaff.setVisible(true);
             tfName.setText(selected.getName());
             tfSurname.setText(selected.getSurname());
+            availableCheckBox.setSelected(selected.getAvailable());
             listPatients.setListData(selected.getPatients() != null ? selected.getPatients().toArray() : new ArrayList<>().toArray());
         }
     }

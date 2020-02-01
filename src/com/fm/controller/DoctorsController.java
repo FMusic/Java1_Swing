@@ -42,4 +42,16 @@ public class DoctorsController {
         tx.commit();
         RepoManager.closeSession();
     }
+
+    public static void update(StaffEntity entity, String firstName, String surname, boolean availabilty) {
+        Session session = RepoManager.getSession();
+        Transaction tx = session.beginTransaction();
+        StaffEntity se = session.load(StaffEntity.class, entity.getIdEmployee());
+        se.setName(firstName);
+        se.setSurname(surname);
+        se.setAvailable(availabilty);
+        session.save(se);
+        tx.commit();
+        RepoManager.closeSession();
+    }
 }
