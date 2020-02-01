@@ -1,6 +1,7 @@
 package com.fm.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -11,6 +12,7 @@ public class StaffEntity {
     private String surname;
     private TypesEntity type;
     private Boolean available;
+    private List<MiniPatientEntity> patients;
 
     public StaffEntity() {
     }
@@ -93,5 +95,14 @@ public class StaffEntity {
         if (this.getType().equals(new TypesEntity("Doctor")) || this.getType().equals(new TypesEntity("dr")))
             return "Dr." + name + " " + surname;
         return name + " " + surname;
+    }
+
+    @OneToMany
+    public List<MiniPatientEntity> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(List<MiniPatientEntity> patients){
+        this.patients = patients;
     }
 }

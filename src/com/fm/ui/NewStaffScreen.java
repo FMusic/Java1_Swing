@@ -47,6 +47,7 @@ public class NewStaffScreen extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent actionEvent) {
         DoctorsController.SaveNewStaff(tfType.getText(), tfName.getText(), tfSurname.getText());
         setVisible(false);
+        new HospitalManagementScreen().setVisible(true);
         dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
 }

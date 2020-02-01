@@ -32,16 +32,14 @@ public class DoctorsController {
         RepoManager.closeSession();
     }
 
-    public StaffEntity getStaffMember(int id){
-        String qs = "from StaffEntity where id = " + id;
-        throw new NotYetImplementedException();
-    }
-
-    public void saveBulkStaffMembers(List<StaffEntity> listOfStaff){
-        throw new NotYetImplementedException();
-    }
-
-    public List<StaffEntity> getAllStaff(){
-        throw new NotYetImplementedException();
+    public static void remove(StaffEntity entity) {
+        Session session = RepoManager.getSession();
+        String qs = "delete StaffEntity where id=:id";
+        Query q = session.createQuery(qs);
+        q.setInteger("id", entity.getIdEmployee());
+        Transaction tx = session.beginTransaction();
+        q.executeUpdate();
+        tx.commit();
+        RepoManager.closeSession();
     }
 }

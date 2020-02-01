@@ -27,14 +27,6 @@ public class PatientsController {
         return minis;
     }
 
-    public static void saveNewPatient(ComprehensivePatientEntity cpe){
-        throw new NotYetImplementedException();
-    }
-
-    public static void saveNewPatient(MiniPatientEntity mpe){
-        throw new NotYetImplementedException();
-    }
-
     public static ComprehensivePatientEntity getPatientForMini(MiniPatientEntity mpe) throws Exception {
         String qs = "from ComprehensivePatientEntity";
         Query q = RepoManager.getSession().createQuery(qs);
@@ -47,9 +39,5 @@ public class PatientsController {
             }
         }
         throw new Exception("Patient not found");
-    }
-
-    public List<ComprehensivePatientEntity> getAllPatientsForDoctor(StaffEntity doctor){
-        throw new NotYetImplementedException();
     }
 }
