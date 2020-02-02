@@ -2,9 +2,12 @@ package com.fm.ui;
 
 import com.fm.controller.PatientsController;
 import com.fm.model.*;
+import com.fm.utils.CalUtils;
+import org.jdatepicker.JDatePicker;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Calendar;
 import java.util.Objects;
 
 public class ComprehensiveForm extends JFrame {
@@ -112,14 +115,18 @@ public class ComprehensiveForm extends JFrame {
     private JCheckBox cbBreakfast;
     private JCheckBox cbLunch;
     private JCheckBox cbDinner;
+    private JPanel pnlDate1;
+    private JPanel pnlDate2;
     private String NO = "no";
+    JDatePicker jdp;
+    JDatePicker jdp2;
 
-//    public ComprehensiveForm() {
-//        cpe = null;
-//        initWidgets();
-//        initListeners();
-//        setForm();
-//    }
+    public ComprehensiveForm() {
+        cpe = null;
+        initWidgets();
+        initListeners();
+        setForm();
+    }
 
     private void setForm() {
         setContentPane(panelMain);
@@ -178,6 +185,15 @@ public class ComprehensiveForm extends JFrame {
         setPersonal();
         setLifestyle();
         setComplaints();
+        if (cpe!= null) {
+            jdp = new JDatePicker(cpe.getMiniPatient().getDateOfBirth());
+            pnlDate1.add(jdp);
+            jdp2 = new JDatePicker(cpe.getDateOfInput());
+            pnlDate2.add(jdp2);
+        } else{
+            jdp = new JDatePicker(Calendar.getInstance());
+
+        }
     }
 
     private void setContact() {

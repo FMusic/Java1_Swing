@@ -12,6 +12,18 @@
         <properties/>
         <border type="none"/>
         <children>
+          <component id="fd333" class="javax.swing.JLabel">
+            <constraints/>
+            <properties>
+              <text value="Date of input:"/>
+            </properties>
+          </component>
+          <grid id="b18b8" binding="pnlDate2" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints/>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
           <component id="81ae4" class="javax.swing.JButton" binding="saveButton" default-binding="true">
             <constraints/>
             <properties>
@@ -288,6 +300,15 @@
                       <enabled value="false"/>
                     </properties>
                   </component>
+                  <grid id="ba32c" binding="pnlDate1" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                    <constraints>
+                      <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <forms/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
                 </children>
               </grid>
             </children>

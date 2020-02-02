@@ -7,9 +7,11 @@ import org.hibernate.Transaction;
 import com.fm.utils.CalUtils;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Sample {
-    public static void putSampleData(){
+    public static void putSampleData() {
         final Session session = RepoManager.getSession();
         //objects instantiation
         TypesEntity teDoctor = new TypesEntity("Doctor");
@@ -22,9 +24,9 @@ public class Sample {
                 "Croatia", "10000");
         ContactDetailsEntity cde = new ContactDetailsEntity(anaAdress, anaPermAdress, "none", "None",
                 "0911611136", "pager", "fax", "email");
-        NextOfKinsEntity nke = new NextOfKinsEntity(cde,"Frane", "Music", "Music", "Daddy");
+        NextOfKinsEntity nke = new NextOfKinsEntity(cde, "Frane", "Music", "Music", "Daddy");
         MiniPatientEntity miniAna = new MiniPatientEntity(new Date(System.currentTimeMillis()), "Ana", "Music",
-                "Skocibusic", "F", CalUtils.getDate(27,01,1996),
+                "Skocibusic", "F", CalUtils.getDate(27, 01, 1996),
                 "Glupa je", "0911611136", "none", nke);
         ImportantMedicalComplaintsEntity importantMedicalComplAna = new ImportantMedicalComplaintsEntity("no", "no", "good", "bad", "always shitting", "good", "doesn't have",
                 "doesnt have a brain", "Frane", "Fucking with him", "none");
@@ -34,6 +36,7 @@ public class Sample {
         ProfessionDetsEntity professionAna = new ProfessionDetsEntity("Mathematician", 20000);
         ComprehensivePatientEntity cpe = new ComprehensivePatientEntity(new Date(System.currentTimeMillis()), miniAna, cde, nke, personalDetsAna, professionAna,
                 lifestyleAna, basicComplaintsAna, importantMedicalComplAna);
+        teDrFrane.getPatients().add(miniAna);
         Transaction tx = session.beginTransaction();
         session.save(teDoctor);
         session.save(teSpec);

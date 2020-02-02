@@ -1,7 +1,9 @@
 package com.fm;
 
 import com.fm.controller.ControllersController;
+import com.fm.ui.ComprehensiveForm;
 import com.fm.ui.DoctorScreen;
+import com.fm.ui.HospitalManagementScreen;
 import com.fm.ui.MainMenu;
 
 public class Main {
@@ -11,8 +13,14 @@ public class Main {
 //            MainMenu mm = new MainMenu();
 //            mm.setVisible(true);
 //        }).run();
+//        new Thread(()->{
+//            new DoctorScreen().setVisible(true);
+//        }).run();
+//        new Thread(() -> {
+//            new ComprehensiveForm().setVisible(true);
+//        }).run();
         new Thread(()->{
-            new DoctorScreen().setVisible(true);
+            new HospitalManagementScreen().setVisible(true);
         }).run();
     }
 
