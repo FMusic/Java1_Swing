@@ -27,6 +27,8 @@ public class DoctorScreen extends  JFrame{
     private JPanel pnlDate;
     private JList list1;
     private JTextArea textArea1;
+    private JPanel pnlSpecs;
+    private JButton btnSend;
     private JComboBox<StaffEntity> cbSpecs;
     JButton butOpenComprehensive;
     private JButton butNewFile;
@@ -49,6 +51,12 @@ public class DoctorScreen extends  JFrame{
         });
         butOpenComprehensive.addActionListener(actionEvent -> (new ComprehensiveForm((MiniPatientEntity) cbPatients.getSelectedItem())).setVisible(true));
         cbPatients.addActionListener(actionEvent -> setFile(cbPatients.getSelectedItem()));
+        btnSend.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                DoctorsController.changeDoctor((MiniPatientEntity)cbPatients.getSelectedItem(), (StaffEntity) cbSpecs.getSelectedItem());
+            }
+        });
     }
 
     private void setFile(@Nullable Object patientFile) {
@@ -83,16 +91,7 @@ public class DoctorScreen extends  JFrame{
         }
         List<StaffEntity> listOfStaff = DoctorsController.getWholeStaff();
 
-        List<StaffEntity> listOfSpecs = new ArrayList<>();
-        listOfStaff.forEach(x-> {
-            if(x.getType().equals(new TypesEntity("Specialist"))){
-                listOfSpecs.add(x);
-            }
-        });
-        specs = new StaffEntity[listOfSpecs.size()];
-        for (int i = 0; i < listOfSpecs.size(); i++) {
-            specs[i] = listOfSpecs.get(i);
-        }
+        specs = DoctorsController.getSpecialists();
     }
 
     private void initWidgets() {
@@ -105,6 +104,7 @@ public class DoctorScreen extends  JFrame{
         picker = new JDatePicker(Calendar.getInstance());
         pnlDate.add(picker);
         cbSpecs = new JComboBox<>(specs);
+        pnlSpecs.add(cbSpecs);
 //        doesnt work
 //        Dimension d = new Dimension(800,30);
 //        butOpenComprehensive.setSize(d);

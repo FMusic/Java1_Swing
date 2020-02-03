@@ -13,15 +13,15 @@ public class Main {
 //            MainMenu mm = new MainMenu();
 //            mm.setVisible(true);
 //        }).run();
-//        new Thread(()->{
-//            new DoctorScreen().setVisible(true);
-//        }).run();
+        new Thread(()->{
+            new DoctorScreen().setVisible(true);
+        }).run();
 //        new Thread(() -> {
 //            new ComprehensiveForm().setVisible(true);
 //        }).run();
-        new Thread(()->{
-            new HospitalManagementScreen().setVisible(true);
-        }).run();
+//        new Thread(()->{
+//            new HospitalManagementScreen().setVisible(true);
+//        }).run();
     }
 
     private static void hibernateCheck() {

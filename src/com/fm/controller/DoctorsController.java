@@ -1,13 +1,14 @@
 package com.fm.controller;
 
 import com.fm.dbRepo.RepoManager;
+import com.fm.model.MiniPatientEntity;
 import com.fm.model.StaffEntity;
 import com.fm.model.TypesEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.NotYetImplementedException;
 import org.hibernate.query.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DoctorsController {
@@ -53,5 +54,40 @@ public class DoctorsController {
         session.save(se);
         tx.commit();
         RepoManager.closeSession();
+    }
+
+    public static StaffEntity[] getSpecialists() {
+        List<StaffEntity> specStaff = getListOfSpecs();
+        StaffEntity[] toReturn = new StaffEntity[specStaff.size()];
+        for (int i = 0; i < specStaff.size(); i++) {
+            toReturn[i] = specStaff.get(i);
+        }
+        return  toReturn;
+    }
+
+    public static List<StaffEntity> getListOfSpecs() {
+        return getSubset("Specialist");
+    }
+
+    public static void changeDoctor(MiniPatientEntity patient, StaffEntity toDoctor) {
+        StaffEntity oldDoc = patient.getDoctorForPatient();
+        patient.setDoctorForPatient(toDoctor);
+        oldDoc.getPatients().remove(patient);
+        toDoctor.getPatients().add(patient);
+    }
+
+    public static List<StaffEntity> getListOfDoctors() {
+        return getSubset("Doctor");
+    }
+
+    private static List<StaffEntity> getSubset(String subsetString) {
+        List<StaffEntity> wholeStaff = getWholeStaff();
+        List<StaffEntity> specs = new ArrayList<>();
+        wholeStaff.forEach(x->{
+            if (x.getType().getTypeName().equals(subsetString)){
+                specs.add(x);
+            }
+        });
+        return specs;
     }
 }

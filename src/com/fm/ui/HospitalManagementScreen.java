@@ -1,5 +1,6 @@
 package com.fm.ui;
 
+import com.fm.controller.ChartController;
 import com.fm.controller.DoctorsController;
 import com.fm.model.StaffEntity;
 import com.fm.model.TypesEntity;
@@ -23,6 +24,7 @@ public class HospitalManagementScreen extends JFrame implements ListSelectionLis
     private JTextField tfSurname;
     private JList listPatients;
     private JCheckBox availableCheckBox;
+    private JPanel pnlChart;
     private List<StaffEntity> listOfDocs;
     private List<StaffEntity> listOfSpecs;
     private StaffEntity[] arrayOfDocs;

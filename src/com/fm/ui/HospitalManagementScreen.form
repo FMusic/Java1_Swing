@@ -161,6 +161,12 @@
           </grid>
         </children>
       </grid>
+      <grid id="22eb2" binding="pnlChart" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints border-constraint="South"/>
+        <properties/>
+        <border type="none"/>
+        <children/>
+      </grid>
     </children>
   </grid>
 </form>

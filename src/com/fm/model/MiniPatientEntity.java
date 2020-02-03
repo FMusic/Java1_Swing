@@ -20,6 +20,7 @@ public class MiniPatientEntity {
     private String tel2;
     private NextOfKinsEntity nextOfKin;
     private List<PatientsFilesEntity> listOfFiles;
+    private StaffEntity doctor;
 
     public MiniPatientEntity() {
     }
@@ -182,5 +183,14 @@ public class MiniPatientEntity {
 
     public void setListOfFiles(List<PatientsFilesEntity> listOfFiles) {
         this.listOfFiles = listOfFiles;
+    }
+
+    @OneToOne
+    public StaffEntity getDoctorForPatient(){
+        return doctor;
+    }
+
+    public void setDoctorForPatient(StaffEntity doctor){
+        this.doctor = doctor;
     }
 }
