@@ -19,6 +19,7 @@ public class ComprehensivePatientEntity {
     private LifestyleDetsEntity lifestyleDets;
     private BasicComplaintsEntity basicComplaints;
     private ImportantMedicalComplaintsEntity importantMedicalCompl;
+    private PatientFeesEntity fees;
 
     public ComprehensivePatientEntity() {
     }
@@ -131,6 +132,15 @@ public class ComprehensivePatientEntity {
 
     public void setImportantMedicalCompl(ImportantMedicalComplaintsEntity importantMedicalCompl) {
         this.importantMedicalCompl = importantMedicalCompl;
+    }
+
+    @OneToOne
+    public PatientFeesEntity getFees() {
+        return fees;
+    }
+
+    public void setFees(PatientFeesEntity fees){
+        this.fees = fees;
     }
 
     @Override

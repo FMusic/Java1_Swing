@@ -27,5 +27,6 @@
         <mapping class="com.fm.model.ProfessionDetsEntity"/>
         <mapping class="com.fm.model.StaffEntity"/>
         <mapping class="com.fm.model.TypesEntity"/>
+        <mapping class="com.fm.model.PatientFeesEntity"/>
     </session-factory>
 </hibernate-configuration>

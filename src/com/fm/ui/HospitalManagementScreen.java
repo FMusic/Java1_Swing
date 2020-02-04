@@ -4,10 +4,13 @@ import com.fm.controller.ChartController;
 import com.fm.controller.DoctorsController;
 import com.fm.model.StaffEntity;
 import com.fm.model.TypesEntity;
+import javafx.scene.chart.Chart;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,11 +28,17 @@ public class HospitalManagementScreen extends JFrame implements ListSelectionLis
     private JList listPatients;
     private JCheckBox availableCheckBox;
     private JPanel pnlChart;
+    private JPanel pnlChartsCombo;
+    private JComboBox<String> cbPickChart;
+    private JComboBox cbPickChartLength;
     private List<StaffEntity> listOfDocs;
     private List<StaffEntity> listOfSpecs;
     private StaffEntity[] arrayOfDocs;
     private StaffEntity[] arrayOfSpecs;
     private StaffEntity selected;
+    private String[] listChartsWeek;
+    private String[] listChartLength;
+    private String[] listChartsDay;
 
     public HospitalManagementScreen(){
         initData();
@@ -58,12 +67,24 @@ public class HospitalManagementScreen extends JFrame implements ListSelectionLis
         for (int i = 0; i < listOfDocs.size(); i++) {
             arrayOfDocs[i] = listOfDocs.get(i);
         }
+        listChartLength = new String[2];
+        listChartLength[0] = "Daily";
+        listChartLength[1] = "Weekly";
+        listChartsDay = new String[3];
+        listChartsWeek = new String[2];
+        listChartsDay[0] ="New patients by doctor - TIMESERIES";
+        listChartsDay[1] ="All fees by patient - COLUMNS";
+        listChartsDay[2] = "Patients by doctor -  PIE";
+        listChartsWeek[0] ="Weekly patients by doctor";
+        listChartsWeek[1] = "Average number of patients per doctor";
     }
 
     private void initWidgets() {
         listDr.setListData(arrayOfDocs);
         listSpec.setListData(arrayOfSpecs);
         pnlStaff.setVisible(false);
+        cbPickChartLength = new JComboBox<>(listChartLength);
+        pnlChartsCombo.add(cbPickChartLength);
     }
 
     private void initListeners() {
@@ -86,6 +107,35 @@ public class HospitalManagementScreen extends JFrame implements ListSelectionLis
             DoctorsController.update(selected, tfName.getText(), tfSurname.getText(), availableCheckBox.isSelected());
             new HospitalManagementScreen().setVisible(true);
             setVisible(false);
+        });
+        cbPickChartLength.addActionListener(actionEvent -> {
+            String chosen = (String) cbPickChartLength.getSelectedItem();
+            if (chosen.equals(listChartLength[0])){
+                cbPickChart = new JComboBox<>(listChartsDay);
+            } else{
+                cbPickChart = new JComboBox<>(listChartsWeek);
+            }
+            pnlChartsCombo.removeAll();
+            pnlChartsCombo.add(cbPickChartLength);
+            cbPickChartLength.setSelectedItem(chosen);
+            pnlChartsCombo.add(cbPickChart);
+            pnlChartsCombo.updateUI();
+        });
+        cbPickChart.addActionListener(actionEvent -> {
+            String chosen = (String) cbPickChart.getSelectedItem();
+            if(chosen.equals(listChartsDay[0])){
+                pnlChart.add(ChartController.dailyChartTimeseriesNewPatientsByDoctor());
+            }
+            if (chosen.equals(listChartsDay[1])){
+                pnlChart.add(ChartController.dailyChartAllFeesByPatient());
+            }
+            if(chosen.equals(listChartsDay[2])){
+                pnlChart.add(ChartController.dailyChartPiePatientsByDoctors());
+            }
+            if (chosen.equals(listChartsWeek[0])){
+                pnlChart.add(ChartController.weeklyChartTimeseriesNewPatientsByDoctor());
+            }
+            //todo - last chart
         });
     }
 
@@ -125,7 +175,7 @@ public class HospitalManagementScreen extends JFrame implements ListSelectionLis
     }
 
     private void setForm() {
-        setSize(700, 550);
+        setSize(700, 800);
         setContentPane(pnlMain);
     }
 
