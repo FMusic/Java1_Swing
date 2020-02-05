@@ -126,7 +126,11 @@ public class ChartController {
     }
 
     public static JPanel weeklyChartTimeseriesAveragePatientsByDoctor() {
-        //todo
-        throw new NotYetImplementedException();
+        TimeSeriesCollection tsc = new TimeSeriesCollection();
+        List<StaffEntity> docs = DoctorsController.getListOfDoctors();
+        docs.forEach(staffEntity -> {
+            //todo - finish
+        });
+        return null;
     }
 }

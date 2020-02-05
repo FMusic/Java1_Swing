@@ -175,6 +175,7 @@ public class HospitalManagementScreen extends JFrame implements ListSelectionLis
 
     private void actionPerformed(ActionEvent actionEvent) {
         String chosen = (String) cbPickChart.getSelectedItem();
+        pnlChart.removeAll();
         if (chosen.equals(listChartsDay[0])) {
             pnlChart.add(ChartController.dailyChartTimeseriesNewPatientsByDoctor());
         }
@@ -190,5 +191,6 @@ public class HospitalManagementScreen extends JFrame implements ListSelectionLis
         if (chosen.equals(listChartsWeek[1])){
             pnlChart.add(ChartController.weeklyChartTimeseriesAveragePatientsByDoctor());
         }
+        pnlChart.updateUI();
     }
 }
