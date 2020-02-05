@@ -2,6 +2,7 @@ package com.fm.controller;
 
 import com.fm.model.ComprehensivePatientEntity;
 import com.fm.model.StaffEntity;
+import org.hibernate.cfg.NotYetImplementedException;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -14,6 +15,7 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.time.Week;
 
 import javax.swing.*;
+import java.awt.*;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -121,5 +123,10 @@ public class ChartController {
                 false
         );
         return new ChartPanel(chart);
+    }
+
+    public static JPanel weeklyChartTimeseriesAveragePatientsByDoctor() {
+        //todo
+        throw new NotYetImplementedException();
     }
 }

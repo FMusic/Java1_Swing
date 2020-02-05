@@ -115,28 +115,17 @@ public class HospitalManagementScreen extends JFrame implements ListSelectionLis
             } else{
                 cbPickChart = new JComboBox<>(listChartsWeek);
             }
+            cbPickChart.addActionListener(this::actionPerformed);
             pnlChartsCombo.removeAll();
             pnlChartsCombo.add(cbPickChartLength);
             cbPickChartLength.setSelectedItem(chosen);
             pnlChartsCombo.add(cbPickChart);
             pnlChartsCombo.updateUI();
         });
-        cbPickChart.addActionListener(actionEvent -> {
-            String chosen = (String) cbPickChart.getSelectedItem();
-            if(chosen.equals(listChartsDay[0])){
-                pnlChart.add(ChartController.dailyChartTimeseriesNewPatientsByDoctor());
-            }
-            if (chosen.equals(listChartsDay[1])){
-                pnlChart.add(ChartController.dailyChartAllFeesByPatient());
-            }
-            if(chosen.equals(listChartsDay[2])){
-                pnlChart.add(ChartController.dailyChartPiePatientsByDoctors());
-            }
-            if (chosen.equals(listChartsWeek[0])){
-                pnlChart.add(ChartController.weeklyChartTimeseriesNewPatientsByDoctor());
-            }
-            //todo - last chart
-        });
+        if (cbPickChart != null) {
+            cbPickChart.addActionListener(
+                    this::actionPerformed);
+        }
     }
 
     private void deleteFromLists(StaffEntity toDelete) {
@@ -182,5 +171,24 @@ public class HospitalManagementScreen extends JFrame implements ListSelectionLis
     @Override
     public void valueChanged(ListSelectionEvent listSelectionEvent) {
         showStaffInfo(listOfDocs.get(( (JList) listSelectionEvent.getSource()).getSelectedIndex()), (JList) listSelectionEvent.getSource());
+    }
+
+    private void actionPerformed(ActionEvent actionEvent) {
+        String chosen = (String) cbPickChart.getSelectedItem();
+        if (chosen.equals(listChartsDay[0])) {
+            pnlChart.add(ChartController.dailyChartTimeseriesNewPatientsByDoctor());
+        }
+        if (chosen.equals(listChartsDay[1])) {
+            pnlChart.add(ChartController.dailyChartAllFeesByPatient());
+        }
+        if (chosen.equals(listChartsDay[2])) {
+            pnlChart.add(ChartController.dailyChartPiePatientsByDoctors());
+        }
+        if (chosen.equals(listChartsWeek[0])) {
+            pnlChart.add(ChartController.weeklyChartTimeseriesNewPatientsByDoctor());
+        }
+        if (chosen.equals(listChartsWeek[1])){
+            pnlChart.add(ChartController.weeklyChartTimeseriesAveragePatientsByDoctor());
+        }
     }
 }
