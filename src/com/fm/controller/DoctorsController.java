@@ -90,4 +90,12 @@ public class DoctorsController {
         });
         return specs;
     }
+
+    public static List<TypesEntity> getAvailableTypes(){
+        String qs = "from TypesEntity";
+        Session s = RepoManager.getSession();
+        Query q = s.createQuery(qs);
+        RepoManager.closeSession();
+        return q.list();
+    }
 }

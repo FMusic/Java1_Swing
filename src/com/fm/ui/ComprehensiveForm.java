@@ -1,14 +1,15 @@
 package com.fm.ui;
 
+import com.fm.controller.DoctorsController;
 import com.fm.controller.PatientsController;
 import com.fm.model.*;
-import com.fm.utils.CalUtils;
 import org.jdatepicker.JDatePicker;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Calendar;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ComprehensiveForm extends JFrame {
     //Frane added
@@ -365,6 +366,38 @@ public class ComprehensiveForm extends JFrame {
     }
 
     private void saveData() {
+        AddressInfoEntity adrPresent = new AddressInfoEntity(Integer.parseInt(tfContactPresDoorNo.getText()),
+                tfContactPresStreet.getText(),
+                tfContactPresArea.getText(),
+                tfContactPresCity.getText(),
+                tfContactPresState.getText(),
+                tfContactPresPincode.getText());
+        AddressInfoEntity adrPerm = new AddressInfoEntity(Integer.parseInt(tfContactPermDoorno.getText()),
+                tfContactPermStreet.getText(),
+                tfContactPermArea.getText(),
+                tfContactPermCity.getText(),
+                tfContactPermState.getText(),
+                tfContactPermPincode.getText());
+        final StaffEntity[] se = new StaffEntity[1];
+        DoctorsController.getListOfDoctors().forEach(staffEntity -> {
+            if ((staffEntity.getName() + staffEntity.getSurname()).equals(tfHospitalTreated.getText())){
+                se[0] = staffEntity;
+            }
+        });
+        if(se[0] == null){
+            String[] s = tfHospitalTreated.getText().split(" ");
+            java.util.List<TypesEntity> types = DoctorsController.getAvailableTypes();
+            final TypesEntity[] doctype = new TypesEntity[1];
+            types.forEach(x-> {
+                if (x.getTypeName().equals("Doctor")){
+                    doctype[0] = x;
+                }
+            });
+            se[0] = new StaffEntity(s[0], s[1], doctype[0], true);
+        }
+        BasicComplaintsEntity bce = new BasicComplaintsEntity(tfComplaint.getText(), tfHistoryPrevTreat.getText(), se[0]);
+
+
 
     }
 }
