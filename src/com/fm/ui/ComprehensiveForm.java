@@ -170,6 +170,23 @@ public class ComprehensiveForm extends JFrame {
         saveButton.addActionListener(actionEvent -> saveData());
         smokerCheckBox.addActionListener(actionEvent -> tfNoOfCigarettesPerDay.setEnabled(smokerCheckBox.isSelected()));
         consumeAlchoholicBeveragesCheckBox.addActionListener(actionEvent -> tfDrinksPerDay.setEnabled(consumeAlchoholicBeveragesCheckBox.isSelected()));
+        setListenerForCheckbox(diabeticCheckBox, tfDiabetic);
+        setListenerForCheckbox(hypertensiveCheckBox, tfHypertensive);
+        setListenerForCheckbox(cardiacConditionCheckBox, tfCardiacCond);
+        setListenerForCheckbox(respiratoryCheckBox, tfRespCond);
+        setListenerForCheckbox(digestiveConditionCheckBox, tfDigestiveCond);
+        setListenerForCheckbox(orthopedicCondCheckBox, tfOrthoepdicCond);
+        setListenerForCheckbox(muscularCheckBox, tfMuscularCond);
+        setListenerForCheckbox(neuroCheckBox, tfNeuroCond);
+        setListenerForCheckbox(allergiesCheckBox, tfKnownAllergies);
+        setListenerForCheckbox(adverseReactCheckBox, tfKnownAdverseReact);
+        setListenerForCheckbox(majorSurgeriesCheckbox, tfMajorSurgeries);
+    }
+
+    private void setListenerForCheckbox(JCheckBox cb, JTextField tf) {
+            cb.addActionListener(actionEvent -> {
+                tf.setEnabled(true);
+            });
     }
 
     private void returnScreen() {
