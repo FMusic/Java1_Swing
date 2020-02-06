@@ -180,4 +180,17 @@ public class ComprehensivePatientEntity {
                 ", importantMedicalCompl=" + importantMedicalCompl +
                 '}';
     }
+
+    public ComprehensivePatientEntity update(ComprehensivePatientEntity cde){
+        this.dateOfInput = cde.getDateOfInput();
+        this.miniPatient = cde.getMiniPatient();
+        this.contactDetails = cde.getContactDetails();
+        this.nextOfKin = cde.getNextOfKin();
+        this.personalDetails = cde.getPersonalDetails();
+        this.professionDetails = cde.getProfessionDets();
+        this.lifestyleDets = cde.getLifestyleDets();
+        this.basicComplaints = cde.getBasicComplaints();
+        this.importantMedicalCompl = cde.getImportantMedicalCompl();
+        return this;
+    }
 }

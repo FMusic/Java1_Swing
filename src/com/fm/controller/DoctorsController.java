@@ -27,7 +27,12 @@ public class DoctorsController {
         q.setString("typename", type);
         TypesEntity te = (TypesEntity) q.uniqueResult();
         StaffEntity se = new StaffEntity(firstname, surname, te, true);
-        Transaction tx = session.beginTransaction();
+        Transaction tx;
+        if (!session.getTransaction().isActive()) {
+            tx = session.beginTransaction();
+        } else{
+            tx = session.getTransaction();
+        }
         session.save(se);
         tx.commit();
         RepoManager.closeSession();
@@ -38,7 +43,12 @@ public class DoctorsController {
         String qs = "delete StaffEntity where id=:id";
         Query q = session.createQuery(qs);
         q.setInteger("id", entity.getIdEmployee());
-        Transaction tx = session.beginTransaction();
+        Transaction tx;
+        if (!session.getTransaction().isActive()) {
+            tx = session.beginTransaction();
+        } else{
+            tx = session.getTransaction();
+        }
         q.executeUpdate();
         tx.commit();
         RepoManager.closeSession();
@@ -46,7 +56,12 @@ public class DoctorsController {
 
     public static void update(StaffEntity entity, String firstName, String surname, boolean availabilty) {
         Session session = RepoManager.getSession();
-        Transaction tx = session.beginTransaction();
+        Transaction tx;
+        if (!session.getTransaction().isActive()) {
+            tx = session.beginTransaction();
+        } else{
+            tx = session.getTransaction();
+        }
         StaffEntity se = session.load(StaffEntity.class, entity.getIdEmployee());
         se.setName(firstName);
         se.setSurname(surname);

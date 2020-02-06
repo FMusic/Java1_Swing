@@ -2,6 +2,7 @@ package com.fm.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,6 +37,7 @@ public class MiniPatientEntity {
         this.tel1 = tel1;
         this.tel2 = tel2;
         this.nextOfKin = nextOfKin;
+        listOfFiles = new ArrayList<>();
     }
 
     @Basic

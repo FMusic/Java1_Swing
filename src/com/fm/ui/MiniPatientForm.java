@@ -1,6 +1,9 @@
 package com.fm.ui;
 
+import com.fm.controller.PatientsController;
+import com.fm.model.ContactDetailsEntity;
 import com.fm.model.MiniPatientEntity;
+import com.fm.model.NextOfKinsEntity;
 import org.hibernate.cfg.NotYetImplementedException;
 import org.jdatepicker.JDatePicker;
 
@@ -8,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.util.Calendar;
 
 import static com.fm.utils.SwingUtils.setPanel;
@@ -67,12 +71,18 @@ public class MiniPatientForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 saveData();
+                setVisible(false);
+                new ReceptionScreen();
             }
         });
     }
 
     private void saveData() {
-        throw new NotYetImplementedException();
+        Date d = new Date(System.currentTimeMillis());
+        NextOfKinsEntity nok = new NextOfKinsEntity(new ContactDetailsEntity(), tfKinFirst.getText(), tfKinMiddle.getText(), tfKinLast.getText(), "");
+        MiniPatientEntity mpe = new MiniPatientEntity(d, tfFirst.getText(), tfMiddle.getText(), tfLast.getText(), radioMale.isSelected() ? "M" : "F",
+                new Date(jdpDate.getModel().getYear(), jdpDate.getModel().getMonth(), jdpDate.getModel().getDay()), tfBrief.getText(), tfTelephone1.getText(), tfTelephone2.getText(), nok);
+        PatientsController.saveMiniPatient(mpe);
     }
 
     public MiniPatientForm(MiniPatientEntity mfm){

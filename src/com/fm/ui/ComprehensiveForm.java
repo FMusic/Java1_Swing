@@ -7,6 +7,7 @@ import org.jdatepicker.JDatePicker;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Date;
 import java.util.Calendar;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
@@ -136,7 +137,8 @@ public class ComprehensiveForm extends JFrame {
 
     public ComprehensiveForm(MiniPatientEntity mpe) {
         try {
-            cpe = PatientsController.getPatientForMini(mpe);
+            cpe = new ComprehensivePatientEntity();
+            cpe.setMiniPatient(mpe);
             initWidgets();
             initListeners();
             initData();
@@ -180,18 +182,28 @@ public class ComprehensiveForm extends JFrame {
     }
 
     private void initData() {
+        if (cpe.getNextOfKin() != null){
+            setNok();
+        }
         setBasic();
-        setContact();
-        setNok();
-        setPersonal();
-        setLifestyle();
-        setComplaints();
-        if (cpe!= null) {
+        if (cpe.getContactDetails() != null){
+            setContact();
+        }
+        if (cpe.getPersonalDetails() != null){
+            setPersonal();
+        }
+        if (cpe.getLifestyleDets() != null){
+            setLifestyle();
+        }
+        if(cpe.getBasicComplaints() != null){
+            setComplaints();
+        }
+        if (cpe.getMiniPatient() != null) {
             jdp = new JDatePicker(cpe.getMiniPatient().getDateOfBirth());
             pnlDate1.add(jdp);
-            jdp2 = new JDatePicker(cpe.getDateOfInput());
+            jdp2 = new JDatePicker(cpe.getMiniPatient().getDateOfInput());
             pnlDate2.add(jdp2);
-        } else{
+        } else {
             jdp = new JDatePicker(Calendar.getInstance());
 
         }
@@ -226,7 +238,7 @@ public class ComprehensiveForm extends JFrame {
         tfMiniFirst.setText(mpe.getFirstName());
         tfMiniMiddle.setText(mpe.getMiddleName());
         tfMiniLast.setText(mpe.getLastName());
-        NextOfKinsEntity nke = cpe.getNextOfKin();
+        NextOfKinsEntity nke = mpe.getNextOfKin();
         tfMiniNextFirst.setText(nke.getFirstName());
         tfMiniNextMiddle.setText(nke.getMiddleName());
         tfMiniNextLast.setText(nke.getLastName());
@@ -243,7 +255,7 @@ public class ComprehensiveForm extends JFrame {
     }
 
     private void setNok() {
-        NextOfKinsEntity nok = cpe.getNextOfKin();
+        NextOfKinsEntity nok = cpe.getNextOfKin() != null ? cpe.getNextOfKin() : new NextOfKinsEntity();
         ContactDetailsEntity cdeNok = nok.getContactDetails() != null ? nok.getContactDetails() : new ContactDetailsEntity();
         AddressInfoEntity adrNok = cdeNok.getPresentAddress() != null ? cdeNok.getPresentAddress() : new AddressInfoEntity();
         tfNokRelat.setText(nok.getRelationship() != null ? nok.getRelationship() : "");
@@ -366,38 +378,90 @@ public class ComprehensiveForm extends JFrame {
     }
 
     private void saveData() {
-        AddressInfoEntity adrPresent = new AddressInfoEntity(Integer.parseInt(tfContactPresDoorNo.getText()),
-                tfContactPresStreet.getText(),
-                tfContactPresArea.getText(),
-                tfContactPresCity.getText(),
-                tfContactPresState.getText(),
-                tfContactPresPincode.getText());
-        AddressInfoEntity adrPerm = new AddressInfoEntity(Integer.parseInt(tfContactPermDoorno.getText()),
-                tfContactPermStreet.getText(),
-                tfContactPermArea.getText(),
-                tfContactPermCity.getText(),
-                tfContactPermState.getText(),
-                tfContactPermPincode.getText());
         final StaffEntity[] se = new StaffEntity[1];
         DoctorsController.getListOfDoctors().forEach(staffEntity -> {
-            if ((staffEntity.getName() + staffEntity.getSurname()).equals(tfHospitalTreated.getText())){
+            if ((staffEntity.getName() + staffEntity.getSurname()).equals(tfHospitalTreated.getText())) {
                 se[0] = staffEntity;
             }
         });
-        if(se[0] == null){
+        if (se[0] == null) {
             String[] s = tfHospitalTreated.getText().split(" ");
             java.util.List<TypesEntity> types = DoctorsController.getAvailableTypes();
             final TypesEntity[] doctype = new TypesEntity[1];
-            types.forEach(x-> {
-                if (x.getTypeName().equals("Doctor")){
+            types.forEach(x -> {
+                if (x.getTypeName().equals("Doctor")) {
                     doctype[0] = x;
                 }
             });
             se[0] = new StaffEntity(s[0], s[1], doctype[0], true);
         }
         BasicComplaintsEntity bce = new BasicComplaintsEntity(tfComplaint.getText(), tfHistoryPrevTreat.getText(), se[0]);
+        String hypertensive = "", diabetic = "", cardiac = "", respiratory = "", digestive = "", orthopedic = "", muscular = "", neurological = "",
+                allergies = "", adverse = "", majorSurg = "";
+        hypertensive = getTextIfCheckBox(hypertensiveCheckBox, tfHypertensive);
+        diabetic = getTextIfCheckBox(diabeticCheckBox, tfDiabetic);
+        cardiac = getTextIfCheckBox(cardiacConditionCheckBox, tfCardiacCond);
+        respiratory = getTextIfCheckBox(respiratoryCheckBox, tfRespCond);
+        digestive = getTextIfCheckBox(digestiveConditionCheckBox, tfDigestiveCond);
+        orthopedic = getTextIfCheckBox(orthopedicCondCheckBox, tfOrthoepdicCond);
+        allergies = getTextIfCheckBox(allergiesCheckBox, tfKnownAllergies);
+        adverse = getTextIfCheckBox(adverseReactCheckBox, tfKnownAdverseReact);
+        majorSurg = getTextIfCheckBox(majorSurgeriesCheckbox, tfMajorSurgeries);
+        ImportantMedicalComplaintsEntity imce = new ImportantMedicalComplaintsEntity(hypertensive,
+                diabetic, cardiac, respiratory, digestive, orthopedic, muscular, neurological,
+                allergies, adverse, majorSurg);
+        LifestyleDetsEntity lde = new LifestyleDetsEntity(
+                vegetarianCheckBox.isSelected(),
+                smokerCheckBox.isSelected(),
+                Integer.parseInt(tfNoOfCigarettesPerDay.getText()),
+                consumeAlchoholicBeveragesCheckBox.isSelected(),
+                Integer.parseInt(tfDrinksPerDay.getText()),
+                tfStimulants.getText() != "",
+                Integer.parseInt(tfDrinksPerDay.getText() == "" ? "0" : tfDrinksPerDay.getText()),
+                Integer.parseInt(tfSoftDrinks.getText()),
+                false,
+                predominantlyEatHomeFoodRadioButton.isSelected(),
+                cbBreakfast.isSelected(),
+                cbLunch.isSelected(),
+                cbDinner.isSelected()
+        );
+        AddressInfoEntity nokPres = new AddressInfoEntity(Integer.parseInt(tfNokDoorno.getText()),
+                tfNokStreet.getText(), tfNokArea.getText(), tfNokCity.getText(), tfNokState.getText(),
+                tfNokPin.getText());
+        AddressInfoEntity nokPerm = new AddressInfoEntity(Integer.parseInt(tfNokDoorno.getText()),
+                tfNokStreet.getText(), tfNokArea.getText(), tfNokCity.getText(), tfNokState.getText(),
+                tfNokPin.getText());
+        ContactDetailsEntity nokCde = new ContactDetailsEntity(nokPres, nokPerm, tfNokTelHome.getText(),
+                tfNokTelWork.getText(), tfNokMob.getText(), tfNokPag.getText(), tfNokFax.getText(),
+                tfNokEmail.getText());
+        NextOfKinsEntity nke = new NextOfKinsEntity(nokCde, tfNokFirst.getText(), tfNokMiddle.getText(),
+                tfNokLast.getText(), tfMiniRelationship.getText());
+        MiniPatientEntity mpe = new MiniPatientEntity(
+                new Date(jdp2.getModel().getYear(), jdp2.getModel().getMonth(), jdp2.getModel().getDay()),
+                tfMiniFirst.getText(), tfMiniMiddle.getText(), tfMiniLast.getText(),
+                rbMiniMale.isSelected() ? "Male" : "Female",
+                new Date(jdp.getModel().getYear(), jdp.getModel().getMonth(), jdp.getModel().getDay()),
+                tfBasicBriefStatement.getText(), tfBasicPhoneNumber1.getText(), tfBasicPhone2.getText(), nke);
 
+        AddressInfoEntity presAdr = new AddressInfoEntity(Integer.parseInt(tfContactPresDoorNo.getText()), tfContactPresStreet.getText(),
+                tfContactPresArea.getText(), tfContactPresCity.getText(), tfContactPresState.getText(), tfContactPresPincode.getText());
+        AddressInfoEntity permAdr = new AddressInfoEntity(Integer.parseInt(tfContactPermDoorno.getText()), tfContactPermStreet.getText(), tfContactPermArea.getText(), tfContactPermCity.getText(), tfContactPermState.getText(), tfContactPermPincode.getText());
+        ContactDetailsEntity cde = new ContactDetailsEntity(presAdr, permAdr, tfContactTelHome.getText(), tfContactTelWork.getText(),
+                tfContactMobile.getText(), tfContactPager.getText(), tfContactFax.getText(), tfContactEmail.getText());
+        PersonalDetailsEntity persDets = new PersonalDetailsEntity(tfMariatl.getText(), Integer.parseInt(tfNoofDep.getText()),
+                Integer.parseInt(tfHeight.getText()), Integer.parseInt(tfWeight.getText()), tfBloodType.getText());
+        ProfessionDetsEntity profDets = new ProfessionDetsEntity(tfOccupation.getText(), Integer.parseInt(tfGrossAnnual.getText()));
+        ComprehensivePatientEntity cpeToSave = new ComprehensivePatientEntity(new Date(jdp2.getModel().getYear(), jdp2.getModel().getMonth(), jdp2.getModel().getDay()),
+                mpe, cde, nke, persDets, profDets, lde, bce, imce);
+        cpe = cpe.update(cpeToSave);
+        PatientsController.saveOrUpdatePatient(cpe);
 
+    }
 
+    private String getTextIfCheckBox(JCheckBox checkBox, JTextField textfield) {
+        if (checkBox.isSelected()) {
+            return textfield.getText();
+        }
+        return "";
     }
 }
