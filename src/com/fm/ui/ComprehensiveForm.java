@@ -137,15 +137,16 @@ public class ComprehensiveForm extends JFrame {
 
     public ComprehensiveForm(MiniPatientEntity mpe) {
         try {
+            cpe = PatientsController.getPatientForMini(mpe);
+        } catch (Exception ex) {
             cpe = new ComprehensivePatientEntity();
             cpe.setMiniPatient(mpe);
-            initWidgets();
-            initListeners();
-            initData();
-            setForm();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            cpe.setNextOfKin(mpe.getNextOfKin());
         }
+        initWidgets();
+        initListeners();
+        initData();
+        setForm();
 
     }
 
@@ -184,9 +185,9 @@ public class ComprehensiveForm extends JFrame {
     }
 
     private void setListenerForCheckbox(JCheckBox cb, JTextField tf) {
-            cb.addActionListener(actionEvent -> {
-                tf.setEnabled(true);
-            });
+        cb.addActionListener(actionEvent -> {
+            tf.setEnabled(true);
+        });
     }
 
     private void returnScreen() {
@@ -199,20 +200,20 @@ public class ComprehensiveForm extends JFrame {
     }
 
     private void initData() {
-        if (cpe.getNextOfKin() != null){
+        if (cpe.getNextOfKin() != null) {
             setNok();
         }
         setBasic();
-        if (cpe.getContactDetails() != null){
+        if (cpe.getContactDetails() != null) {
             setContact();
         }
-        if (cpe.getPersonalDetails() != null){
+        if (cpe.getPersonalDetails() != null) {
             setPersonal();
         }
-        if (cpe.getLifestyleDets() != null){
+        if (cpe.getLifestyleDets() != null) {
             setLifestyle();
         }
-        if(cpe.getBasicComplaints() != null){
+        if (cpe.getBasicComplaints() != null) {
             setComplaints();
         }
         if (cpe.getMiniPatient() != null) {
@@ -272,7 +273,7 @@ public class ComprehensiveForm extends JFrame {
     }
 
     private void setNok() {
-        NextOfKinsEntity nok = cpe.getNextOfKin() != null ? cpe.getNextOfKin() : new NextOfKinsEntity();
+        NextOfKinsEntity nok = cpe.getNextOfKin();
         ContactDetailsEntity cdeNok = nok.getContactDetails() != null ? nok.getContactDetails() : new ContactDetailsEntity();
         AddressInfoEntity adrNok = cdeNok.getPresentAddress() != null ? cdeNok.getPresentAddress() : new AddressInfoEntity();
         tfNokRelat.setText(nok.getRelationship() != null ? nok.getRelationship() : "");
@@ -451,8 +452,9 @@ public class ComprehensiveForm extends JFrame {
         ContactDetailsEntity nokCde = new ContactDetailsEntity(nokPres, nokPerm, tfNokTelHome.getText(),
                 tfNokTelWork.getText(), tfNokMob.getText(), tfNokPag.getText(), tfNokFax.getText(),
                 tfNokEmail.getText());
-        NextOfKinsEntity nke = new NextOfKinsEntity(nokCde, tfNokFirst.getText(), tfNokMiddle.getText(),
-                tfNokLast.getText(), tfMiniRelationship.getText());
+        NextOfKinsEntity nke1 = cpe.getMiniPatient().getNextOfKin();
+        NextOfKinsEntity nke = new NextOfKinsEntity(nokCde, tfMiniNextFirst.getText(), tfMiniNextMiddle.getText(), tfMiniNextLast.getText(), tfMiniRelationship.getText());
+        nke = nke1.update(nke);
         MiniPatientEntity mpe = new MiniPatientEntity(
                 new Date(jdp2.getModel().getYear(), jdp2.getModel().getMonth(), jdp2.getModel().getDay()),
                 tfMiniFirst.getText(), tfMiniMiddle.getText(), tfMiniLast.getText(),
@@ -462,7 +464,7 @@ public class ComprehensiveForm extends JFrame {
 
         AddressInfoEntity presAdr = new AddressInfoEntity(Integer.parseInt(tfContactPresDoorNo.getText().equals("") ? "0" : tfContactPresDoorNo.getText()), tfContactPresStreet.getText(),
                 tfContactPresArea.getText(), tfContactPresCity.getText(), tfContactPresState.getText(), tfContactPresPincode.getText());
-        AddressInfoEntity permAdr = new AddressInfoEntity(Integer.parseInt(tfContactPermDoorno.getText().equals("") ? "0": tfContactPermDoorno.getText()), tfContactPermStreet.getText(), tfContactPermArea.getText(), tfContactPermCity.getText(), tfContactPermState.getText(), tfContactPermPincode.getText());
+        AddressInfoEntity permAdr = new AddressInfoEntity(Integer.parseInt(tfContactPermDoorno.getText().equals("") ? "0" : tfContactPermDoorno.getText()), tfContactPermStreet.getText(), tfContactPermArea.getText(), tfContactPermCity.getText(), tfContactPermState.getText(), tfContactPermPincode.getText());
         ContactDetailsEntity cde = new ContactDetailsEntity(presAdr, permAdr, tfContactTelHome.getText(), tfContactTelWork.getText(),
                 tfContactMobile.getText(), tfContactPager.getText(), tfContactFax.getText(), tfContactEmail.getText());
         PersonalDetailsEntity persDets = new PersonalDetailsEntity(tfMariatl.getText(), Integer.parseInt(tfNoofDep.getText().equals("") ? "0" : tfNoofDep.getText()),

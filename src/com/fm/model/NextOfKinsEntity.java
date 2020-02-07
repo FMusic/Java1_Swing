@@ -13,10 +13,11 @@ public class NextOfKinsEntity {
     private String relationship;
     private ContactDetailsEntity contactDetails;
 
-    public NextOfKinsEntity(){
+    public NextOfKinsEntity() {
 
     }
-    public NextOfKinsEntity(ContactDetailsEntity contactDetails, String firstName, String middleName, String lastName, String relationship){
+
+    public NextOfKinsEntity(ContactDetailsEntity contactDetails, String firstName, String middleName, String lastName, String relationship) {
         this.contactDetails = contactDetails;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -113,5 +114,18 @@ public class NextOfKinsEntity {
     @Override
     public int hashCode() {
         return Objects.hash(idNextOfKin, firstName, middleName, lastName, relationship, contactDetails);
+    }
+
+    public NextOfKinsEntity update(NextOfKinsEntity nke) {
+        ContactDetailsEntity nkeCde = nke.getContactDetails();
+        if (!this.equals(nke)) {
+            this.contactDetails = nkeCde;
+            this.firstName = nke.getFirstName();
+            this.lastName = nke.getLastName();
+            this.middleName = nke.getMiddleName();
+            this.relationship = nke.getRelationship();
+            this.idNextOfKin = nke.getIdNextOfKin();
+        }
+        return this;
     }
 }
