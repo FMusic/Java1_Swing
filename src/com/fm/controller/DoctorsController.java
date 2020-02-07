@@ -108,9 +108,13 @@ public class DoctorsController {
 
     public static List<TypesEntity> getAvailableTypes(){
         String qs = "from TypesEntity";
+        List<TypesEntity> lista = new ArrayList<>();
         Session s = RepoManager.getSession();
         Query q = s.createQuery(qs);
+        q.list().forEach(x-> {
+            lista.add((TypesEntity) x);
+        });
         RepoManager.closeSession();
-        return q.list();
+        return lista;
     }
 }

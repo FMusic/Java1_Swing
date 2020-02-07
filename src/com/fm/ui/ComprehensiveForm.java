@@ -430,22 +430,22 @@ public class ComprehensiveForm extends JFrame {
         LifestyleDetsEntity lde = new LifestyleDetsEntity(
                 vegetarianCheckBox.isSelected(),
                 smokerCheckBox.isSelected(),
-                Integer.parseInt(tfNoOfCigarettesPerDay.getText()),
+                Integer.parseInt(tfNoOfCigarettesPerDay.getText().equals("") ? "0" : tfNoOfCigarettesPerDay.getText()),
                 consumeAlchoholicBeveragesCheckBox.isSelected(),
-                Integer.parseInt(tfDrinksPerDay.getText()),
+                Integer.parseInt(tfDrinksPerDay.getText().equals("") ? "0" : tfDrinksPerDay.getText()),
                 tfStimulants.getText() != "",
-                Integer.parseInt(tfDrinksPerDay.getText() == "" ? "0" : tfDrinksPerDay.getText()),
-                Integer.parseInt(tfSoftDrinks.getText()),
+                Integer.parseInt(tfDrinksPerDay.getText().equals("") ? "0" : tfDrinksPerDay.getText()),
+                Integer.parseInt(tfSoftDrinks.getText().equals("") ? "0" : tfSoftDrinks.getText()),
                 false,
-                predominantlyEatHomeFoodRadioButton.isSelected(),
+                false,
                 cbBreakfast.isSelected(),
                 cbLunch.isSelected(),
                 cbDinner.isSelected()
         );
-        AddressInfoEntity nokPres = new AddressInfoEntity(Integer.parseInt(tfNokDoorno.getText()),
+        AddressInfoEntity nokPres = new AddressInfoEntity(Integer.parseInt(tfNokDoorno.getText().equals("") ? "0" : tfNokDoorno.getText()),
                 tfNokStreet.getText(), tfNokArea.getText(), tfNokCity.getText(), tfNokState.getText(),
                 tfNokPin.getText());
-        AddressInfoEntity nokPerm = new AddressInfoEntity(Integer.parseInt(tfNokDoorno.getText()),
+        AddressInfoEntity nokPerm = new AddressInfoEntity(Integer.parseInt(tfNokDoorno.getText().equals("") ? "0" : tfNokDoorno.getText()),
                 tfNokStreet.getText(), tfNokArea.getText(), tfNokCity.getText(), tfNokState.getText(),
                 tfNokPin.getText());
         ContactDetailsEntity nokCde = new ContactDetailsEntity(nokPres, nokPerm, tfNokTelHome.getText(),
@@ -456,18 +456,19 @@ public class ComprehensiveForm extends JFrame {
         MiniPatientEntity mpe = new MiniPatientEntity(
                 new Date(jdp2.getModel().getYear(), jdp2.getModel().getMonth(), jdp2.getModel().getDay()),
                 tfMiniFirst.getText(), tfMiniMiddle.getText(), tfMiniLast.getText(),
-                rbMiniMale.isSelected() ? "Male" : "Female",
+                rbMiniMale.isSelected() ? "M" : "F",
                 new Date(jdp.getModel().getYear(), jdp.getModel().getMonth(), jdp.getModel().getDay()),
                 tfBasicBriefStatement.getText(), tfBasicPhoneNumber1.getText(), tfBasicPhone2.getText(), nke);
 
-        AddressInfoEntity presAdr = new AddressInfoEntity(Integer.parseInt(tfContactPresDoorNo.getText()), tfContactPresStreet.getText(),
+        AddressInfoEntity presAdr = new AddressInfoEntity(Integer.parseInt(tfContactPresDoorNo.getText().equals("") ? "0" : tfContactPresDoorNo.getText()), tfContactPresStreet.getText(),
                 tfContactPresArea.getText(), tfContactPresCity.getText(), tfContactPresState.getText(), tfContactPresPincode.getText());
-        AddressInfoEntity permAdr = new AddressInfoEntity(Integer.parseInt(tfContactPermDoorno.getText()), tfContactPermStreet.getText(), tfContactPermArea.getText(), tfContactPermCity.getText(), tfContactPermState.getText(), tfContactPermPincode.getText());
+        AddressInfoEntity permAdr = new AddressInfoEntity(Integer.parseInt(tfContactPermDoorno.getText().equals("") ? "0": tfContactPermDoorno.getText()), tfContactPermStreet.getText(), tfContactPermArea.getText(), tfContactPermCity.getText(), tfContactPermState.getText(), tfContactPermPincode.getText());
         ContactDetailsEntity cde = new ContactDetailsEntity(presAdr, permAdr, tfContactTelHome.getText(), tfContactTelWork.getText(),
                 tfContactMobile.getText(), tfContactPager.getText(), tfContactFax.getText(), tfContactEmail.getText());
-        PersonalDetailsEntity persDets = new PersonalDetailsEntity(tfMariatl.getText(), Integer.parseInt(tfNoofDep.getText()),
-                Integer.parseInt(tfHeight.getText()), Integer.parseInt(tfWeight.getText()), tfBloodType.getText());
-        ProfessionDetsEntity profDets = new ProfessionDetsEntity(tfOccupation.getText(), Integer.parseInt(tfGrossAnnual.getText()));
+        PersonalDetailsEntity persDets = new PersonalDetailsEntity(tfMariatl.getText(), Integer.parseInt(tfNoofDep.getText().equals("") ? "0" : tfNoofDep.getText()),
+                Integer.parseInt(tfHeight.getText().equals("") ? "0" : tfHeight.getText()), Integer.parseInt(tfWeight.getText().equals("") ? "0" : tfWeight.getText()),
+                tfBloodType.getText());
+        ProfessionDetsEntity profDets = new ProfessionDetsEntity(tfOccupation.getText(), Integer.parseInt(tfGrossAnnual.getText().equals("") ? "0" : tfGrossAnnual.getText()));
         ComprehensivePatientEntity cpeToSave = new ComprehensivePatientEntity(new Date(jdp2.getModel().getYear(), jdp2.getModel().getMonth(), jdp2.getModel().getDay()),
                 mpe, cde, nke, persDets, profDets, lde, bce, imce);
         cpe = cpe.update(cpeToSave);

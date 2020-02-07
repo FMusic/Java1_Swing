@@ -62,6 +62,7 @@ public class PatientsController {
         } else{
             tx = s.getTransaction();
         }
+        s.saveOrUpdate(cpe.getBasicComplaints().getPhysicianTreated());
         s.saveOrUpdate(imc);
         s.saveOrUpdate(bce);
         s.saveOrUpdate(ld);
