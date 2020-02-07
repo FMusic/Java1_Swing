@@ -195,4 +195,21 @@ public class MiniPatientEntity {
     public void setDoctorForPatient(StaffEntity doctor){
         this.doctor = doctor;
     }
+
+    public MiniPatientEntity update(MiniPatientEntity mpe) {
+        if (!this.equals(mpe)){
+            this.setDoctorForPatient(mpe.getDoctorForPatient());
+            this.setBriefStatement(mpe.getBriefStatement());
+            this.setDateOfBirth(mpe.getDateOfBirth());
+            this.setFirstName(mpe.getFirstName());
+            this.setMiddleName(mpe.getMiddleName());
+            this.setLastName(mpe.getLastName());
+            this.setListOfFiles(mpe.getListOfFiles());
+            this.setNextOfKin(mpe.getNextOfKin());
+            this.setSex(mpe.getSex());
+            this.setTel1(mpe.getTel1());
+            this.setTel2(mpe.getTel2());
+        }
+        return this;
+    }
 }

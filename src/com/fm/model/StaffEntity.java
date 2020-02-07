@@ -95,7 +95,7 @@ public class StaffEntity {
     @Override
     public String toString() {
         if (this.getType().equals(new TypesEntity("Doctor")) || this.getType().equals(new TypesEntity("dr")))
-            return "Dr." + name + " " + surname;
+            return "Dr. " + name + " " + surname;
         return name + " " + surname;
     }
 

@@ -397,8 +397,15 @@ public class ComprehensiveForm extends JFrame {
 
     private void saveData() {
         final StaffEntity[] se = new StaffEntity[1];
+        String[] staffName = tfHospitalTreated.getText().split(" ");
+        String fullName;
+        if (staffName[0].equals("Dr.")){
+            fullName = staffName[1] + " " + staffName[2];
+        } else{
+            fullName = staffName[0] + " " + staffName[1];
+        }
         DoctorsController.getListOfDoctors().forEach(staffEntity -> {
-            if ((staffEntity.getName() + staffEntity.getSurname()).equals(tfHospitalTreated.getText())) {
+            if ((staffEntity.getName() + " " + staffEntity.getSurname()).equals(fullName)) {
                 se[0] = staffEntity;
             }
         });
@@ -461,6 +468,7 @@ public class ComprehensiveForm extends JFrame {
                 rbMiniMale.isSelected() ? "M" : "F",
                 new Date(jdp.getModel().getYear(), jdp.getModel().getMonth(), jdp.getModel().getDay()),
                 tfBasicBriefStatement.getText(), tfBasicPhoneNumber1.getText(), tfBasicPhone2.getText(), nke);
+        mpe = cpe.getMiniPatient().update(mpe);
 
         AddressInfoEntity presAdr = new AddressInfoEntity(Integer.parseInt(tfContactPresDoorNo.getText().equals("") ? "0" : tfContactPresDoorNo.getText()), tfContactPresStreet.getText(),
                 tfContactPresArea.getText(), tfContactPresCity.getText(), tfContactPresState.getText(), tfContactPresPincode.getText());
